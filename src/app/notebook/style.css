@@ -1,0 +1,37 @@
+.custom-y-scrollbar {
+  overflow-x: auto;
+}
+
+.custom-y-scrollbar::-webkit-scrollbar {
+  height: 8px; /* Adjust scrollbar height */
+}
+
+.custom-y-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #ccc; /* Scrollbar color */
+  border-radius: 4px;
+}
+
+.custom-y-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track color */
+}
+
+.partial-text {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 20px;
+  /* max-height: 300px; */
+}
+
+.partial-text::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: linear-gradient(
+    to bottom,
+    rgb(255 255 255 / 35%),
+    rgb(255 255 255)
+  );
+}
