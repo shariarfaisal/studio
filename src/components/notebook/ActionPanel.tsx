@@ -3,15 +3,27 @@
 import { ArrowRightIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import Prompts from "./Prompts";
+import { useNotebook } from "./Provider";
 
 export default function ActionPanel() {
+  const {
+    toggleChats,
+    tab: { active },
+  } = useNotebook();
   return (
-    <div className="sticky bg-white box-border left-0 bottom-0 w-full">
+    <div className="sticky bg-white box-border left-0 bottom-0 w-full min-h-[144px]">
       <div className="bg-white w-full px-4 py-2 flex flex-col gap-3 rounded-t-3xl shadow-[0px_-1px_20px_rgba(0,0,0,0.2)]">
         <Prompts />
         <div className="w-full  flex items-center gap-2 justify-center">
           <div>
-            <Button variant="ghost">Chat</Button>
+            <Button
+              onClick={() => {
+                toggleChats();
+              }}
+              variant="ghost"
+            >
+              {active === "chats" ? "Close Chats" : "Open Chats"}
+            </Button>
           </div>
           <div className="relative max-w-2xl w-full h-14 flex items-center bg-zinc-100 border border-zinc-200 rounded-full">
             <input

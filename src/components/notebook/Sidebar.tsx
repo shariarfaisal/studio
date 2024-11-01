@@ -3,30 +3,14 @@ import { PlusSquare } from "lucide-react";
 import { Button } from "../ui/button";
 import { SidebarMenu, SidebarMenuItem } from "../ui/sidebar";
 import { Checkbox } from "../ui/checkbox";
+import { useQuery } from "@tanstack/react-query";
+import { notebookService } from "@/services/notebook";
 
 export default function NotebookSidebar() {
-  const sources = [
-    {
-      title: "Source 1",
-      id: "1",
-    },
-    {
-      title: "Source 2",
-      id: "2",
-    },
-    {
-      title: "Source 3",
-      id: "3",
-    },
-    {
-      title: "Source 4",
-      id: "4",
-    },
-    {
-      title: "Source 5",
-      id: "5",
-    },
-  ];
+  const { data, isLoading } = useQuery({
+    queryKey: ["sources"],
+    queryFn: notebookService.getSources,
+  });
 
   return (
     <div>
@@ -37,7 +21,8 @@ export default function NotebookSidebar() {
         </Button>
       </div>
       <SidebarMenu className="px-2">
-        {sources.map((item) => (
+        {isLoading && <div>Loading...</div>}
+        {data?.map((item) => (
           <SidebarMenuItem
             key={item.title}
             className="hover:bg-zinc-200 rounded-xl px-3 h-12 flex justify-between items-center"
