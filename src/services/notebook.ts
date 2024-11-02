@@ -47,6 +47,7 @@ export const notebookService = {
         const newNote = {
           id: Date.now().toString(),
           title: "New Note",
+          editable: true,
           content: "",
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
@@ -66,16 +67,15 @@ export const notebookService = {
       content: string;
     };
   }): Promise<NoteType> => {
-    return await new Promise((resolve, reject) => {
+    return await new Promise((resolve) => {
       setTimeout(() => {
-        const note = notes.find((n) => n.id === id);
-        if (note) {
-          note.title = payload.title;
-          note.content = payload.content;
-          resolve(note);
-        } else {
-          reject("Note not found");
-        }
+        const note = { ...notes[0] };
+        note.id = id;
+        note.title = payload.title;
+        note.content = payload.content;
+        note.editable = true;
+        note.updatedAt = new Date().toISOString();
+        resolve(note);
       }, 1000);
     });
   },

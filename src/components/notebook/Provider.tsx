@@ -296,6 +296,7 @@ type NotebookContextType = NotebookState & {
   toggleSelectNote: (id: string, value: boolean) => void;
   selectAllNote: () => void;
   deselectAllNote: () => void;
+  updateNote: (note: NoteType) => void;
   setNotes: (notes: NoteType[]) => void;
   setSources: (sources: SourceType[]) => void;
   setPrompts: (prompts: PromptType[]) => void;
@@ -313,6 +314,7 @@ export const NotebookContext = createContext<NotebookContextType>({
   toggleSelectNote: () => {},
   selectAllNote: () => {},
   deselectAllNote: () => {},
+  updateNote: () => {},
   setNotes: () => {},
   setSources: () => {},
   setPrompts: () => {},
@@ -386,6 +388,13 @@ export default function NotebookProvider({
     dispatch({ type: Types.DESELECT_ALL_NOTE, payload: true });
   };
 
+  const updateNote = (note: NoteType) => {
+    dispatch({
+      type: Types.UPDATE_NOTE,
+      payload: note
+    })
+  }
+
   const isAllNotesSelected = useMemo(() => {
     return state.notes.data.every((note) =>
       state.notes.selected.includes(note.id)
@@ -418,6 +427,7 @@ export default function NotebookProvider({
         toggleSelectNote,
         selectAllNote,
         deselectAllNote,
+        updateNote,
         addNewNote,
         deleteNotes,
         isAllNotesSelected,

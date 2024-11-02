@@ -48,3 +48,17 @@
     rgb(255 255 255)
   );
 }
+
+.tiptap {
+  min-height: 200px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.tiptap:focus {
+  outline: none;
+}

@@ -23,7 +23,7 @@ export default function NotebookChat() {
         display: active === "chats" ? "block" : "none",
       }}
     >
-      <div className="sticky top-16 left-0 z-10 px-4 py-2 bg-white max-w-full overflow-x-auto no-scrollbar shadow-sm lg:shadow-none flex justify-between items-center">
+      <div className="sticky top-16 left-0 z-10 px-4 py-2 bg-background max-w-full overflow-x-auto no-scrollbar shadow-sm lg:shadow-none flex justify-between items-center">
         <h2>Chat</h2>
         <div>
           <Button

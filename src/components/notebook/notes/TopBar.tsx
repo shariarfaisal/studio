@@ -49,7 +49,7 @@ export default function NotebookTopBar() {
   };
 
   return (
-    <div className="sticky top-16 left-0 z-10 px-4 py-2 bg-white max-w-full overflow-x-auto no-scrollbar shadow-sm lg:shadow-none">
+    <div className="sticky top-16 left-0 z-10 px-4 py-2 bg-background max-w-full overflow-x-auto no-scrollbar shadow-sm lg:shadow-none">
       <div className="w-full flex items-center gap-2 ">
         <Button onClick={addNoteHandler} variant="ghost">
           {isPending ? <LoaderIcon className="animate-spin" /> : <Plus />}
