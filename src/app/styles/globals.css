@@ -86,3 +86,11 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.text-gradient-red-to-blue {
+  display: inline-block;
+  background: linear-gradient(45deg, #ff6154, #2196f3);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
