@@ -17,6 +17,7 @@ import Link from "next/link";
 import { EyeOff } from "lucide-react";
 import { useState } from "react";
 import { EyeOpenIcon } from "@radix-ui/react-icons";
+import { CardContent, CardTitle } from "@/components/ui/card";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
@@ -43,69 +44,74 @@ export function LoginForm() {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem className="mb-0">
-              <FormControl>
-                <Input
-                  className="rounded-xl h-10"
-                  type="email"
-                  placeholder="Email"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem className="relative">
-              <FormControl>
-                <Input
-                  className="rounded-xl h-10"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Password"
-                  {...field}
-                />
-              </FormControl>
-              <button
-                onClick={() => setShowPassword(!showPassword)}
-                type="button"
-                className="absolute right-3 top-1"
-              >
-                {showPassword ? (
-                  <EyeOpenIcon className="w-4 h-4" />
-                ) : (
-                  <EyeOff className="w-4 h-4" />
-                )}
-              </button>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="text-sm text-end">
-          <Link
-            className="hover:underline transition-all duration-150"
-            href="/forgot-password"
+    <CardContent className="w-full space-y-3">
+      <CardTitle className="w-full text-2xl text-center text-gradient-red-to-blue">
+        Xin chào mừng bạn
+      </CardTitle>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem className="mb-0">
+                <FormControl>
+                  <Input
+                    className="rounded-xl h-10"
+                    type="email"
+                    placeholder="Email"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem className="relative">
+                <FormControl>
+                  <Input
+                    className="rounded-xl h-10"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
+                    {...field}
+                  />
+                </FormControl>
+                <button
+                  onClick={() => setShowPassword(!showPassword)}
+                  type="button"
+                  className="absolute right-3 top-1"
+                >
+                  {showPassword ? (
+                    <EyeOpenIcon className="w-4 h-4" />
+                  ) : (
+                    <EyeOff className="w-4 h-4" />
+                  )}
+                </button>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="text-sm text-end">
+            <Link
+              className="hover:underline transition-all duration-150"
+              href="/reset-password"
+            >
+              Forgot Password?
+            </Link>
+          </div>
+          <Button
+            variant="submit"
+            className="w-full h-10 rounded-xl"
+            type="submit"
           >
-            Forgot Password?
-          </Link>
-        </div>
-        <Button
-          variant="submit"
-          className="w-full h-10 rounded-xl"
-          type="submit"
-        >
-          Submit
-        </Button>
-      </form>
-    </Form>
+            Submit
+          </Button>
+        </form>
+      </Form>
+    </CardContent>
   );
 }
