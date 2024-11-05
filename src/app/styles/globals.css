@@ -8,10 +8,10 @@ body {
 
 @layer base {
   :root {
-    --background: 210 100% 98%; /* light blue */
-    --foreground: 220 15% 10%; /* dark blue for contrast */
-    --card: 210 100% 98%; /* light blue */
-    --card-foreground: 220 15% 10%; /* dark blue */
+    --background: 255 100% 100%;
+    --foreground: 220 15% 10%;
+    --card: 255 100% 100%;
+    --card-foreground: 220 15% 10%;
     --popover: 210 100% 98%;
     --popover-foreground: 220 15% 10%;
     --primary: 239 100% 67%; /* primary blue */
@@ -93,4 +93,38 @@ body {
   background-clip: border-box;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.scroll-y {
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    background: #f5f5f5 !important;
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #fff;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #d8d8d8;
+    border-radius: 7px;
+
+    &:hover {
+      background: #adadad;
+    }
+  }
+
+  &-dark::-webkit-scrollbar {
+    background: #333333; /* Darker color for scrollbar background */
+  }
+
+  &-dark::-webkit-scrollbar-track {
+    background: #1e1e1e; /* Darker color for scrollbar track */
+  }
+
+  &-dark::-webkit-scrollbar-thumb {
+    background: #8b8b8b; /* Darker color for scrollbar thumb */
+  }
 }

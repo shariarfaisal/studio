@@ -1,33 +1,3 @@
-.scroll-y {
-  overflow-y: auto;
-
-  &::-webkit-scrollbar {
-    background: #cccccc;
-    width: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: #fff;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: #adadad;
-    border-radius: 7px;
-  }
-
-  &-dark::-webkit-scrollbar {
-    background: #333333; /* Darker color for scrollbar background */
-  }
-
-  &-dark::-webkit-scrollbar-track {
-    background: #1e1e1e; /* Darker color for scrollbar track */
-  }
-
-  &-dark::-webkit-scrollbar-thumb {
-    background: #8b8b8b; /* Darker color for scrollbar thumb */
-  }
-}
-
 .partial-text {
   position: relative;
   overflow: hidden;

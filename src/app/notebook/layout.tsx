@@ -1,5 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar";
-import NotebookSidebar from "@/components/notebook/Sidebar";
+import NotebookSidebar from "@/components/notebook/sidebar/Sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { ReactNode } from "react";
 

@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useMemo, useReducer } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useReducer,
+} from "react";
 import {
   ChatMessageType,
   NotebookType,
@@ -19,6 +25,7 @@ export type NotebookState = {
     isLoading: boolean;
     data: SourceType[];
     error: string;
+    selected: string[];
   };
   notes: {
     isLoading: boolean;
@@ -57,6 +64,7 @@ export const initialState: NotebookState = {
     isLoading: false,
     data: [],
     error: "",
+    selected: [],
   },
   prompts: {
     isLoading: false,
@@ -100,6 +108,10 @@ export const Types = {
   ADD_NEW_SOURCE: "ADD_NEW_SOURCE",
   UPDATE_SOURCE: "UPDATE_SOURCE",
   DELETE_SOURCE: "DELETE_SOURCE",
+  SELECT_SOURCE: "SELECT_SOURCE",
+  DESELECT_SOURCE: "DESELECT_SOURCE",
+  SELECT_ALL_SOURCE: "SELECT_ALL_SOURCE",
+  DESELECT_ALL_SOURCE: "DESELECT_ALL_SOURCE",
   SET_PROMPTS_LOADING: "SET_PROMPTS_LOADING",
   SET_PROMPTS_DATA: "SET_PROMPTS_DATA",
   SET_PROMPTS_ERROR: "SET_PROMPTS_ERROR",
@@ -189,8 +201,6 @@ export const reducer = (
           (id) => id !== action.payload
         );
       }
-
-      console.log(state.notes.selected);
       return { ...state };
     case Types.SELECT_ALL_NOTE:
       return {
@@ -239,6 +249,29 @@ export const reducer = (
         state.sources.data.splice(sourceIndex, 1);
       }
       return { ...state };
+    case Types.SELECT_SOURCE:
+      if (!state.sources.selected.includes(action.payload as string)) {
+        state.sources.selected.push(action.payload as string);
+      }
+
+      return { ...state };
+    case Types.DESELECT_SOURCE:
+      if (state.sources.selected.includes(action.payload as string)) {
+        state.sources.selected = state.sources.selected.filter(
+          (id) => id !== action.payload
+        );
+      }
+      return { ...state };
+    case Types.SELECT_ALL_SOURCE:
+      return {
+        ...state,
+        sources: {
+          ...state.sources,
+          selected: state.sources.data.map((source) => source.id),
+        },
+      };
+    case Types.DESELECT_ALL_SOURCE:
+      return { ...state, sources: { ...state.sources, selected: [] } };
     case Types.SET_PROMPTS_LOADING:
       return {
         ...state,
@@ -304,6 +337,12 @@ type NotebookContextType = NotebookState & {
   addNewNote: (note: NoteType) => void;
   deleteNotes: (ids: string[]) => void;
   isAllNotesSelected: boolean;
+  toggleSource: (id: string) => void;
+  selectSource: (id: string) => void;
+  deselectSource: (id: string) => void;
+  selectAllSources: () => void;
+  deselectAllSources: () => void;
+  isAllSourcesSelected: boolean;
 };
 
 export const NotebookContext = createContext<NotebookContextType>({
@@ -322,6 +361,12 @@ export const NotebookContext = createContext<NotebookContextType>({
   addNewNote: () => {},
   deleteNotes: () => {},
   isAllNotesSelected: false,
+  toggleSource: () => {},
+  selectSource: () => {},
+  deselectSource: () => {},
+  selectAllSources: () => {},
+  deselectAllSources: () => {},
+  isAllSourcesSelected: false,
 });
 
 export const useNotebook = () => useContext(NotebookContext);
@@ -391,9 +436,9 @@ export default function NotebookProvider({
   const updateNote = (note: NoteType) => {
     dispatch({
       type: Types.UPDATE_NOTE,
-      payload: note
-    })
-  }
+      payload: note,
+    });
+  };
 
   const isAllNotesSelected = useMemo(() => {
     return state.notes.data.every((note) =>
@@ -402,7 +447,6 @@ export default function NotebookProvider({
   }, [state.notes]);
 
   const addNewNote = (note: NoteType) => {
-    console.log("add new note", note);
     dispatch({ type: Types.ADD_NEW_NOTE, payload: note });
   };
 
@@ -412,6 +456,52 @@ export default function NotebookProvider({
       payload: ids,
     });
   };
+
+  const selectSource = (id: string) => {
+    dispatch({
+      type: Types.SELECT_SOURCE,
+      payload: id,
+    });
+  };
+
+  const deselectSource = (id: string) => {
+    dispatch({
+      type: Types.DESELECT_SOURCE,
+      payload: id,
+    });
+  };
+
+  const toggleSource = useCallback(
+    (id: string) => {
+      const source = state.sources.selected.find((sId) => sId === id);
+      if (source) {
+        deselectSource(id);
+      } else {
+        selectSource(id);
+      }
+    },
+    [state.sources.selected]
+  );
+
+  const selectAllSources = () => {
+    dispatch({
+      type: Types.SELECT_ALL_SOURCE,
+      payload: null,
+    });
+  };
+
+  const deselectAllSources = () => {
+    dispatch({
+      type: Types.DESELECT_ALL_SOURCE,
+      payload: null,
+    });
+  };
+
+  const isAllSourcesSelected = useMemo(() => {
+    return state.sources.data.every((note) =>
+      state.sources.selected.includes(note.id)
+    );
+  }, [state.sources.data, state.sources.selected]);
 
   return (
     <NotebookContext.Provider
@@ -431,6 +521,12 @@ export default function NotebookProvider({
         addNewNote,
         deleteNotes,
         isAllNotesSelected,
+        toggleSource,
+        selectSource,
+        deselectSource,
+        selectAllSources,
+        deselectAllSources,
+        isAllSourcesSelected,
       }}
     >
       {children}
