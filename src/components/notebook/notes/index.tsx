@@ -6,9 +6,8 @@ import NotebookTopBar from "./TopBar";
 import { useNotebook } from "../Provider";
 import { useEffect } from "react";
 
-export default function Notes() {
+export default function Notes({ show }: { show: boolean }) {
   const {
-    tab: { active },
     notes: { data: notesData, selected },
     setNotes,
   } = useNotebook();
@@ -26,7 +25,7 @@ export default function Notes() {
   return (
     <div
       style={{
-        display: active === "notes" ? "block" : "none",
+        display: show ? "block" : "none",
       }}
     >
       <NotebookTopBar />

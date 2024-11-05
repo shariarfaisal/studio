@@ -45,6 +45,7 @@ export default function NotebookSidebar() {
     deselectAllSources,
     isAllSourcesSelected,
     setSources,
+    openSourceDetails,
   } = useNotebook();
   const { data, isLoading } = useQuery({
     queryKey: ["sources"],
@@ -90,6 +91,7 @@ export default function NotebookSidebar() {
           {data?.map((item) => (
             <SidebarMenuItem
               key={item.title}
+              onClick={() => openSourceDetails(item)}
               className="rounded-xl h-12 flex justify-between items-center transition-all duration-150 ease-in-out"
             >
               <div className="h-full flex items-center gap-2 cursor-pointer md:text-base font-medium hover:opacity-80 hover:underline">

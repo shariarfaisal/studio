@@ -26,6 +26,7 @@ export type NotebookState = {
     data: SourceType[];
     error: string;
     selected: string[];
+    openSourceDetails: SourceType | null;
   };
   notes: {
     isLoading: boolean;
@@ -65,6 +66,7 @@ export const initialState: NotebookState = {
     data: [],
     error: "",
     selected: [],
+    openSourceDetails: null,
   },
   prompts: {
     isLoading: false,
@@ -105,6 +107,7 @@ export const Types = {
   SET_SOURCES_LOADING: "SET_SOURCES_LOADING",
   SET_SOURCES_DATA: "SET_SOURCES_DATA",
   SET_SOURCES_ERROR: "SET_SOURCES_ERROR",
+  OPEN_SOURCE_DETAILS: "OPEN_SOURCE_DETAILS",
   ADD_NEW_SOURCE: "ADD_NEW_SOURCE",
   UPDATE_SOURCE: "UPDATE_SOURCE",
   DELETE_SOURCE: "DELETE_SOURCE",
@@ -249,6 +252,14 @@ export const reducer = (
         state.sources.data.splice(sourceIndex, 1);
       }
       return { ...state };
+    case Types.OPEN_SOURCE_DETAILS:
+      return {
+        ...state,
+        sources: {
+          ...state.sources,
+          openSourceDetails: action.payload as SourceType,
+        },
+      };
     case Types.SELECT_SOURCE:
       if (!state.sources.selected.includes(action.payload as string)) {
         state.sources.selected.push(action.payload as string);
@@ -337,6 +348,8 @@ type NotebookContextType = NotebookState & {
   addNewNote: (note: NoteType) => void;
   deleteNotes: (ids: string[]) => void;
   isAllNotesSelected: boolean;
+  openSourceDetails: (source: SourceType) => void;
+  closeSourceDetails: () => void;
   toggleSource: (id: string) => void;
   selectSource: (id: string) => void;
   deselectSource: (id: string) => void;
@@ -361,6 +374,8 @@ export const NotebookContext = createContext<NotebookContextType>({
   addNewNote: () => {},
   deleteNotes: () => {},
   isAllNotesSelected: false,
+  openSourceDetails: () => {},
+  closeSourceDetails: () => {},
   toggleSource: () => {},
   selectSource: () => {},
   deselectSource: () => {},
@@ -457,6 +472,20 @@ export default function NotebookProvider({
     });
   };
 
+  const openSourceDetails = (source: SourceType) => {
+    dispatch({
+      type: Types.OPEN_SOURCE_DETAILS,
+      payload: source,
+    });
+  };
+
+  const closeSourceDetails = () => {
+    dispatch({
+      type: Types.OPEN_SOURCE_DETAILS,
+      payload: null,
+    });
+  };
+
   const selectSource = (id: string) => {
     dispatch({
       type: Types.SELECT_SOURCE,
@@ -521,6 +550,8 @@ export default function NotebookProvider({
         addNewNote,
         deleteNotes,
         isAllNotesSelected,
+        openSourceDetails,
+        closeSourceDetails,
         toggleSource,
         selectSource,
         deselectSource,

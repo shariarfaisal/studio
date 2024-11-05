@@ -8,11 +8,8 @@ import { X } from "lucide-react";
 import Markdown from "react-markdown";
 import { useNotebook } from "../Provider";
 
-export default function NotebookChat() {
-  const {
-    toggleChats,
-    tab: { active },
-  } = useNotebook();
+export default function NotebookChat({ show }: { show: boolean }) {
+  const { toggleChats } = useNotebook();
   const { data, isLoading } = useQuery({
     queryKey: ["chats"],
     queryFn: notebookService.getChats,
@@ -20,7 +17,7 @@ export default function NotebookChat() {
   return (
     <div
       style={{
-        display: active === "chats" ? "block" : "none",
+        display: show ? "block" : "none",
       }}
     >
       <div className="sticky top-16 left-0 z-10 px-4 py-2 bg-background max-w-full overflow-x-auto no-scrollbar shadow-sm lg:shadow-none flex justify-between items-center">
