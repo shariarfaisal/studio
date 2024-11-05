@@ -1,12 +1,19 @@
 "use client";
 
-import { ArrowRightIcon } from "lucide-react";
+import { SendHorizonal } from "lucide-react";
 import { Button } from "../ui/button";
 import { useNotebook } from "./Provider";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function ActionPanel() {
   const {
-    toggleChats,
+    setActiveTab,
     tab: { active },
   } = useNotebook();
   return (
@@ -14,14 +21,15 @@ export default function ActionPanel() {
       <div className="bg-background w-full px-4 py-3 flex flex-col gap-3 rounded-t-3xl shadow-[0px_-1px_20px_rgba(0,0,0,0.2)]">
         <div className="w-full  flex items-center gap-2 justify-center">
           <div>
-            <Button
-              onClick={() => {
-                toggleChats();
-              }}
-              variant="ghost"
-            >
-              {active === "chats" ? "Close Chats" : "Open Chats"}
-            </Button>
+            <Select value={active} onValueChange={setActiveTab}>
+              <SelectTrigger className="w-[80px] rounded-xl">
+                <SelectValue placeholder="Select" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="notes">Notes</SelectItem>
+                <SelectItem value="chats">Chats</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           <div className="relative max-w-2xl w-full h-12 flex items-center bg-blue-50 border border-blue-300 rounded-full">
             <input
@@ -30,9 +38,9 @@ export default function ActionPanel() {
             />
             <Button
               variant="ghost"
-              className="absolute right-3 top-2 bg-blue-200 text-black hover:bg-blue-400 hover:text-white rounded-full w-8 h-8 flex items-center justify-center"
+              className="absolute right-3 top-2 text-blue-600 hover:bg-blue-400 hover:text-white rounded-full w-8 h-8 flex items-center justify-center"
             >
-              <ArrowRightIcon />
+              <SendHorizonal className="w-6 h-6" />
             </Button>
           </div>
         </div>

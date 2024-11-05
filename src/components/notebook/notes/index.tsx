@@ -29,7 +29,7 @@ export default function Notes({ show }: { show: boolean }) {
       }}
     >
       <NotebookTopBar />
-      <div className="p-4 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 min-h-[calc(100vh-210px)]">
+      <div className="p-4 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 min-h-[calc(100vh-180px)]">
         {isLoading && <div>Loading...</div>}
         {notesData.map((note) => (
           <Note
