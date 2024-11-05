@@ -7,6 +7,7 @@ import { useNotebook } from "../Provider";
 import { useEffect } from "react";
 import ContentLoader from "react-content-loader";
 import AddSource from "./AddSource";
+import ChatHistory from "./ChatHistory";
 
 function LoadingItems() {
   return (
@@ -60,14 +61,15 @@ export default function NotebookSidebar() {
 
   return (
     <div className="p-2.5 flex flex-col gap-3">
+      <ChatHistory />
       <div className="flex items-center justify-between p-2.5 bg-background rounded-lg shadow-md">
-        <h3 className="text-base font-semibold">Sources</h3>
+        <h3 className="text-base font-semibold">Add Source</h3>
         <AddSource />
       </div>
       <SidebarMenu className="bg-background p-2.5 pr-1 rounded-lg shadow-md">
         <div className="flex items-center justify-between pr-2">
           <div>
-            <h3 className="font-semibold">Select</h3>
+            <h3 className="font-semibold">Sources</h3>
             <p className="text-gray-500">
               {sources.selected.length}/{sources.data.length} selected
             </p>

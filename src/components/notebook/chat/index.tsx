@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { notebookService } from "@/services/notebook";
 import { useQuery } from "@tanstack/react-query";
-import { X } from "lucide-react";
+import { Edit, X } from "lucide-react";
 import { useNotebook } from "../Provider";
 import Chats from "./Chats";
 
@@ -64,7 +64,12 @@ export default function NotebookChat({ show }: { show: boolean }) {
       }}
     >
       <div className="sticky top-16 left-0 z-10 px-4 py-2 bg-background max-w-full overflow-x-auto no-scrollbar shadow-sm lg:shadow-none flex justify-between items-center">
-        <h2>Chat</h2>
+        <div className="flex items-center gap-2">
+          <h2>Chat</h2>
+          <Button variant="ghost" className="w-8 h-8">
+            <Edit />
+          </Button>
+        </div>
         <div>
           <Button
             size="sm"
