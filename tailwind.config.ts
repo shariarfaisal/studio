@@ -66,6 +66,10 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      backgroundImage: {
+        "btn-gradient-primary":
+          "linear-gradient(45deg, #7c3aed, #2563eb, #0ea5e9)",
+      },
     },
   },
   plugins: [

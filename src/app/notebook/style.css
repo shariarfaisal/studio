@@ -1,20 +1,3 @@
-.custom-y-scrollbar {
-  overflow-x: auto;
-}
-
-.custom-y-scrollbar::-webkit-scrollbar {
-  height: 8px; /* Adjust scrollbar height */
-}
-
-.custom-y-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #ccc; /* Scrollbar color */
-  border-radius: 4px;
-}
-
-.custom-y-scrollbar::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Track color */
-}
-
 .partial-text {
   position: relative;
   overflow: hidden;
@@ -34,4 +17,18 @@
     rgb(255 255 255 / 35%),
     rgb(255 255 255)
   );
+}
+
+.tiptap {
+  min-height: 200px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.tiptap:focus {
+  outline: none;
 }
