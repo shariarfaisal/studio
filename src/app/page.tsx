@@ -11,7 +11,7 @@ export default function Home() {
           </h1>
         </div>
         <div className="w-full flex flex-col gap-5">
-          <h2 className="text-xl font-medium">My Notebooks</h2>
+          <h2 className="text-xl font-medium">My Projects</h2>
           <Projects />
         </div>
       </div>
