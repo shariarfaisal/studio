@@ -16,3 +16,4 @@ export * from "./skeleton";
 export * from "./toast";
 export * from "./toaster";
 export * from "./tooltip";
+export * from "./dropdown-menu";

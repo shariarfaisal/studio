@@ -245,7 +245,7 @@ export const notes: NoteType[] = [
     updatedAt: "2022-01-01T00:00:00.000Z",
   },
   {
-    id: Date.now().toString(),
+    id: new Date().toString(),
     title: "Topic 3",
     editable: false,
     content: `Thematic Outline: Unclear Text Analysis

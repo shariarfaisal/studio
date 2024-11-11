@@ -45,7 +45,7 @@ export const notebookService = {
     return await new Promise((resolve) => {
       setTimeout(() => {
         const newNote = {
-          id: Date.now().toString(),
+          id: new Date().toString(),
           title: "New Note",
           editable: true,
           content: "",
@@ -121,7 +121,7 @@ export const notebookService = {
         console.log(payload);
         const newSource = sources[0];
         newSource.title = "New Source";
-        newSource.id = Date.now().toString();
+        newSource.id = new Date().toString();
         resolve(newSource);
       }, 1000);
     });

@@ -69,6 +69,15 @@ const config: Config = {
       backgroundImage: {
         "btn-gradient-primary":
           "linear-gradient(45deg, #7c3aed, #2563eb, #0ea5e9)",
+        "project-card": "linear-gradient(280deg, var(--project-card-bg))",
+      },
+      gridTemplateColumns: {
+        "auto-fill": "repeat(auto-fill, minmax(max-content, 1fr))",
+        "auto-50": "repeat(auto-fill, minmax(12.5rem, 1fr))",
+        "auto-52": "repeat(auto-fill, minmax(13rem, 1fr))",
+        "auto-60": "repeat(auto-fill, minmax(15rem, 1fr))",
+        "auto-70": "repeat(auto-fill, minmax(17.5rem, 1fr))",
+        "auto-96": "repeat(auto-fill, minmax(24rem, 1fr))",
       },
     },
   },
