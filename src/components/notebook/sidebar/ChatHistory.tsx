@@ -47,7 +47,7 @@ const ChatHistory = () => {
       </div>
       {open && (
         <SidebarMenu className="max-h-[300px] scroll-y pr-1 py-2 border-t border-slate-200">
-          {data.map((item, i) => {
+          {data.map((item) => {
             return (
               <SidebarMenuItem
                 key={item.id}
