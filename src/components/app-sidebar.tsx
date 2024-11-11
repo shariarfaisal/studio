@@ -6,13 +6,13 @@ import {
   SidebarGroupLabel,
 } from "@/components/ui/sidebar";
 
-export function AppSidebar({
+const AppSidebar = ({
   children,
   className,
 }: {
   children: React.ReactNode;
   className?: string;
-}) {
+}) => {
   return (
     <Sidebar className={`z-10  ${className}`}>
       <SidebarContent className="scroll-y">
@@ -25,4 +25,6 @@ export function AppSidebar({
       </SidebarContent>
     </Sidebar>
   );
-}
+};
+
+export { AppSidebar };

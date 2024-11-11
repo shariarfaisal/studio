@@ -3,7 +3,7 @@
 import { notebookService } from "@/services/notebook";
 import { useQuery } from "@tanstack/react-query";
 
-export default function Prompts() {
+const Prompts = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["prompts"],
     queryFn: notebookService.getPrompts,
@@ -23,4 +23,6 @@ export default function Prompts() {
       })}
     </div>
   );
-}
+};
+
+export default Prompts;

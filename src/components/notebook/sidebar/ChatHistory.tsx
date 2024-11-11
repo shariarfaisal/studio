@@ -6,7 +6,7 @@ import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { ChevronDown, ChevronUp, HistoryIcon } from "lucide-react";
 import { useState } from "react";
 
-export default function ChatHistory() {
+const ChatHistory = () => {
   const [open, setOpen] = useState(false);
   const data = [
     {
@@ -64,4 +64,6 @@ export default function ChatHistory() {
       )}
     </div>
   );
-}
+};
+
+export default ChatHistory;

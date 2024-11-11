@@ -7,7 +7,7 @@ import { ReactNode, useState } from "react";
 import { Button } from "./button";
 import { CircleAlert } from "lucide-react";
 
-export default function Popconfirm({
+const Popconfirm = ({
   children,
   title,
   onConfirm,
@@ -17,7 +17,7 @@ export default function Popconfirm({
   title: ReactNode;
   onConfirm?: () => void;
   onCancel?: () => void;
-}) {
+}) => {
   const [open, setOpen] = useState(false);
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -63,4 +63,6 @@ export default function Popconfirm({
       </PopoverContent>
     </Popover>
   );
-}
+};
+
+export { Popconfirm };

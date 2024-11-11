@@ -6,7 +6,7 @@ import NotebookTopBar from "./TopBar";
 import { useNotebook } from "../Provider";
 import { useEffect } from "react";
 
-export default function Notes({ show }: { show: boolean }) {
+const Notes = ({ show }: { show: boolean }) => {
   const {
     notes: { data: notesData, selected },
     setNotes,
@@ -41,4 +41,6 @@ export default function Notes({ show }: { show: boolean }) {
       </div>
     </div>
   );
-}
+};
+
+export default Notes;

@@ -1,4 +1,4 @@
-import { LoginForm } from "@/components/auth/login/form";
+import { LoginForm } from "@/components/auth";
 import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {

@@ -7,7 +7,7 @@ import { useState } from "react";
 import { UpdatePasswordForm } from "./UpdatePassword";
 import { toast } from "@/hooks/use-toast";
 
-export function ResetPasswordForm() {
+export const ResetPasswordForm = () => {
   const [step, setStep] = useState(1);
 
   const onFindEmailSuccess = () => {
@@ -46,4 +46,4 @@ export function ResetPasswordForm() {
       </CardContent>
     </>
   );
-}
+};

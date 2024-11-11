@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui";
 import type { NoteType } from "@/services/models/notebook";
 import Markdown from "react-markdown";
 import { useEditor, EditorContent } from "@tiptap/react";
@@ -90,13 +90,7 @@ function NoteTitle({ note }: { note: NoteType }) {
   );
 }
 
-export default function Note({
-  note,
-  selected,
-}: {
-  note: NoteType;
-  selected: boolean;
-}) {
+const Note = ({ note, selected }: { note: NoteType; selected: boolean }) => {
   const { toggleSelectNote } = useNotebook();
   const editor = useEditor({
     extensions: [
@@ -162,4 +156,6 @@ export default function Note({
       </Dialog>
     </Card>
   );
-}
+};
+
+export default Note;
