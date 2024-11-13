@@ -9,9 +9,9 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui";
 
-export default function ActionPanel() {
+const ActionPanel = () => {
   const {
     setActiveTab,
     tab: { active },
@@ -47,4 +47,6 @@ export default function ActionPanel() {
       </div>
     </div>
   );
-}
+};
+
+export default ActionPanel;

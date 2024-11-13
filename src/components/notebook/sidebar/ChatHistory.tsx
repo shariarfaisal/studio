@@ -6,7 +6,7 @@ import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { ChevronDown, ChevronUp, HistoryIcon } from "lucide-react";
 import { useState } from "react";
 
-export default function ChatHistory() {
+const ChatHistory = () => {
   const [open, setOpen] = useState(false);
   const data = [
     {
@@ -47,7 +47,7 @@ export default function ChatHistory() {
       </div>
       {open && (
         <SidebarMenu className="max-h-[300px] scroll-y pr-1 py-2 border-t border-slate-200">
-          {data.map((item, i) => {
+          {data.map((item) => {
             return (
               <SidebarMenuItem
                 key={item.id}
@@ -64,4 +64,6 @@ export default function ChatHistory() {
       )}
     </div>
   );
-}
+};
+
+export default ChatHistory;

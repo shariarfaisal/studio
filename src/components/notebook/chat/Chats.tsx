@@ -4,7 +4,7 @@ import { ChatMessageType } from "@/services/models/notebook";
 import { copyTextToClipboard } from "@/utils";
 import Markdown from "react-markdown";
 
-export default function Chats({ data = [] }: { data: ChatMessageType[] }) {
+const Chats = ({ data = [] }: { data: ChatMessageType[] }) => {
   return (
     <div className="w-full flex flex-col gap-5 py-3">
       {data.map((m) => {
@@ -56,4 +56,6 @@ export default function Chats({ data = [] }: { data: ChatMessageType[] }) {
           </div> */}
     </div>
   );
-}
+};
+
+export default Chats;

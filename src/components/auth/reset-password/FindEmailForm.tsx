@@ -19,7 +19,7 @@ const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
 });
 
-export function FindEmailForm({ onSuccess }: { onSuccess: () => void }) {
+export const FindEmailForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -76,4 +76,4 @@ export function FindEmailForm({ onSuccess }: { onSuccess: () => void }) {
       </form>
     </Form>
   );
-}
+};

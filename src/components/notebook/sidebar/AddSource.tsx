@@ -19,7 +19,7 @@ import { useDropzone } from "react-dropzone";
 import { useNotebook } from "../Provider";
 import { Input } from "@/components/ui/input";
 
-function AddFile() {
+const AddFile = () => {
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {
       const reader = new FileReader();
@@ -67,9 +67,9 @@ function AddFile() {
       </p>
     </div>
   );
-}
+};
 
-function PasteText({ backHandler }: { backHandler: () => void }) {
+const PasteText = ({ backHandler }: { backHandler: () => void }) => {
   return (
     <div className="space-y-5">
       <div className="space-y-2">
@@ -99,7 +99,7 @@ function PasteText({ backHandler }: { backHandler: () => void }) {
       </div>
     </div>
   );
-}
+};
 
 function WebLink({ backHandler }: { backHandler: () => void }) {
   return (
@@ -142,7 +142,7 @@ function WebLink({ backHandler }: { backHandler: () => void }) {
   );
 }
 
-export default function AddSource() {
+const AddSource = () => {
   const { sources } = useNotebook();
   const [open, setOpen] = useState(false);
 
@@ -236,4 +236,6 @@ export default function AddSource() {
       </Dialog>
     </div>
   );
-}
+};
+
+export default AddSource;

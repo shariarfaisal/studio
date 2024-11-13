@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui";
 import { notebookService } from "@/services/notebook";
 import { useQuery } from "@tanstack/react-query";
 import { Edit, X } from "lucide-react";
@@ -50,7 +50,7 @@ const InitialDisplay = () => {
   );
 };
 
-export default function NotebookChat({ show }: { show: boolean }) {
+const NotebookChat = ({ show }: { show: boolean }) => {
   const { toggleChats } = useNotebook();
   const { data } = useQuery({
     queryKey: ["chats"],
@@ -89,4 +89,6 @@ export default function NotebookChat({ show }: { show: boolean }) {
       </div>
     </div>
   );
-}
+};
+
+export default NotebookChat;

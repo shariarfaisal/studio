@@ -1,13 +1,12 @@
 "use client";
 
-import { Button } from "../../ui/button";
 import { Check, LoaderIcon, Plus, Trash2, X } from "lucide-react";
 import { useNotebook } from "../Provider";
 import { useMutation } from "@tanstack/react-query";
 import { notebookService } from "@/services/notebook";
-import Popconfirm from "@/components/ui/popconfirm";
+import { Button, Popconfirm } from "@/components/ui";
 
-export default function NotebookTopBar() {
+const NotebookTopBar = () => {
   const {
     selectAllNote,
     deselectAllNote,
@@ -82,4 +81,6 @@ export default function NotebookTopBar() {
       </div>
     </div>
   );
-}
+};
+
+export default NotebookTopBar;

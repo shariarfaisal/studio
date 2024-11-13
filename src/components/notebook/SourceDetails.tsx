@@ -1,10 +1,10 @@
 "use client";
 
+import { Button } from "../ui";
 import { useNotebook } from "./Provider";
-import { Button } from "../ui/button";
 import { FileText, WandSparkles, X } from "lucide-react";
 
-export default function SourceDetails() {
+const SourceDetails = () => {
   const {
     sources: { openSourceDetails: data },
     closeSourceDetails,
@@ -49,4 +49,6 @@ export default function SourceDetails() {
       </div>
     </div>
   );
-}
+};
+
+export default SourceDetails;

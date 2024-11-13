@@ -1,4 +1,4 @@
-import Notebook from "@/components/notebook";
+import Notebook from "@/components/notebook/Notebook";
 import "./style.css";
 
 export default function NoteBookPage() {

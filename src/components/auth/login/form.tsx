@@ -26,7 +26,7 @@ const formSchema = z.object({
   }),
 });
 
-export function LoginForm() {
+export const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -114,4 +114,4 @@ export function LoginForm() {
       </Form>
     </CardContent>
   );
-}
+};

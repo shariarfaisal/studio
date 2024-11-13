@@ -1,4 +1,4 @@
-import { ResetPasswordForm } from "@/components/auth/reset-password/form";
+import { ResetPasswordForm } from "@/components/auth";
 import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {

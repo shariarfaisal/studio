@@ -18,7 +18,7 @@ const formSchema = z.object({
   otp: z.string(),
 });
 
-export function VerifyOtpForm({ onSuccess }: { onSuccess: () => void }) {
+export const VerifyOtpForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -80,4 +80,4 @@ export function VerifyOtpForm({ onSuccess }: { onSuccess: () => void }) {
       </form>
     </Form>
   );
-}
+};

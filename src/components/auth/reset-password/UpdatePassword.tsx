@@ -27,7 +27,11 @@ const formSchema = z.object({
   }),
 });
 
-export function UpdatePasswordForm({ onSuccess }: { onSuccess: () => void }) {
+export const UpdatePasswordForm = ({
+  onSuccess,
+}: {
+  onSuccess: () => void;
+}) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -127,4 +131,4 @@ export function UpdatePasswordForm({ onSuccess }: { onSuccess: () => void }) {
       </form>
     </Form>
   );
-}
+};

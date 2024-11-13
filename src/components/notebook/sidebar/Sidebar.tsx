@@ -1,6 +1,5 @@
 "use client";
 import { FileText } from "lucide-react";
-import { SidebarMenu, SidebarMenuItem } from "../../ui/sidebar";
 import { useQuery } from "@tanstack/react-query";
 import { notebookService } from "@/services/notebook";
 import { useNotebook } from "../Provider";
@@ -8,6 +7,7 @@ import { useEffect } from "react";
 import ContentLoader from "react-content-loader";
 import AddSource from "./AddSource";
 import ChatHistory from "./ChatHistory";
+import { SidebarMenu, SidebarMenuItem } from "@/components/ui";
 
 function LoadingItems() {
   return (
@@ -38,7 +38,7 @@ function LoadingItems() {
   );
 }
 
-export default function NotebookSidebar() {
+const NotebookSidebar = () => {
   const {
     sources,
     toggleSource,
@@ -113,4 +113,6 @@ export default function NotebookSidebar() {
       </SidebarMenu>
     </div>
   );
-}
+};
+
+export default NotebookSidebar;

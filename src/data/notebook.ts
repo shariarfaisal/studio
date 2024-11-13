@@ -168,7 +168,7 @@ export const prompts: PromptType[] = [
 export const notes: NoteType[] = [
   {
     id: "1",
-    title: "Note 1",
+    title: "Topic 1",
     editable: false,
     content: `Thematic Outline: Unclear Text Analysis
     I. Problem: Deciphering the meaning and purpose of a text with limited context.
@@ -207,7 +207,7 @@ export const notes: NoteType[] = [
   },
   {
     id: "2",
-    title: "Note 2",
+    title: "Topic 2",
     editable: false,
     content: `Thematic Outline: Unclear Text Analysis
     I. Problem: Deciphering the meaning and purpose of a text with limited context.
@@ -245,8 +245,8 @@ export const notes: NoteType[] = [
     updatedAt: "2022-01-01T00:00:00.000Z",
   },
   {
-    id: Date.now().toString(),
-    title: "Note 3",
+    id: new Date().toString(),
+    title: "Topic 3",
     editable: false,
     content: `Thematic Outline: Unclear Text Analysis
     I. Problem: Deciphering the meaning and purpose of a text with limited context.
@@ -285,7 +285,7 @@ export const notes: NoteType[] = [
   },
   {
     id: "4",
-    title: "Note 4",
+    title: "Topic 4",
     editable: false,
     content: `Thematic Outline: Unclear Text Analysis
     I. Problem: Deciphering the meaning and purpose of a text with limited context.
@@ -324,7 +324,7 @@ export const notes: NoteType[] = [
   },
   {
     id: "5",
-    title: "Note 5",
+    title: "Topic 5",
     editable: false,
     content: `Thematic Outline: Unclear Text Analysis
     I. Problem: Deciphering the meaning and purpose of a text with limited context.
@@ -363,7 +363,7 @@ export const notes: NoteType[] = [
   },
   {
     id: "6",
-    title: "Note 6",
+    title: "Topic 6",
     editable: false,
     content: `Thematic Outline: Unclear Text Analysis
     I. Problem: Deciphering the meaning and purpose of a text with limited context.
@@ -402,7 +402,7 @@ export const notes: NoteType[] = [
   },
   {
     id: "7",
-    title: "Note 7",
+    title: "Topic 7",
     editable: false,
     content: `Thematic Outline: Unclear Text Analysis
     I. Problem: Deciphering the meaning and purpose of a text with limited context.
