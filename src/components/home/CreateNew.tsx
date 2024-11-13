@@ -12,7 +12,7 @@ const CreateNew = () => {
   // const { mutate } = useMutation({
   //   mutationFn: projectService.createProject,
   //   onSuccess: (data) => {
-  //     push(`/notebook/${data.id}`);
+  //     push(`/projects/${data.id}`);
   //   },
   //   onError: () => {},
   // });
@@ -33,7 +33,7 @@ const CreateNew = () => {
     setProjectStore(({ projects }) => ({
       projects: [...projects, project],
     }));
-    push(`/notebook/${project.id}`);
+    push(`/projects/${project.id}`);
   };
 
   return (

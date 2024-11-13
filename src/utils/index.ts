@@ -34,3 +34,5 @@ export function copyTextToClipboard(text: string, onSuccess?: () => void) {
     copyManually();
   }
 }
+
+export * from "./data-extractor";
