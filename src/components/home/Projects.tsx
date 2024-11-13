@@ -21,14 +21,24 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useProjectStore } from "@/store";
+import { Project } from "@/types";
 
-const ProjectCard = ({ project }: { project: ProjectType }) => {
+const ProjectCard = ({ project }: { project: Project }) => {
   const { push } = useRouter();
+  const { setProjectStore } = useProjectStore();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const deleteProject = useCallback(() => {
+    setProjectStore(({ projects }) => ({
+      projects: projects.filter((p) => p.id !== project.id),
+    }));
+  }, [project.id, setProjectStore]);
+
   return (
     <div
-      onClick={(e) => {
+      onClick={() => {
         if (!menuOpen) {
           push(`/notebook/${project.id}`);
         }
@@ -36,20 +46,18 @@ const ProjectCard = ({ project }: { project: ProjectType }) => {
       className="border min-h-[12rem] rounded-xl p-4 flex flex-col bg-project-card lg:max-w-[300px] relative cursor-pointer"
     >
       <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
-        <DropdownMenuTrigger>
-          <button
-            data-type="dropdown"
-            className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/30 cursor-pointer"
-          >
-            <DotsVerticalIcon />
-          </button>
+        <DropdownMenuTrigger className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/30 cursor-pointer">
+          <DotsVerticalIcon />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-[7rem] border border-gray-300 rounded-xl bg-white text-sm p-3 shadow-xl">
           <DropdownMenuItem className="flex gap-2 rounded-xl px-2 py-1.5 hover:bg-gray-100 ">
             <Edit className="w-4 h-4" />
             <span>Edit</span>
           </DropdownMenuItem>
-          <DropdownMenuItem className="flex gap-2 rounded-xl px-2 py-1.5 hover:bg-gray-100 ">
+          <DropdownMenuItem
+            className="flex gap-2 rounded-xl px-2 py-1.5 hover:bg-gray-100"
+            onClick={deleteProject}
+          >
             <Trash2 className="w-4 h-4" />
             <span>Delete</span>
           </DropdownMenuItem>
@@ -61,11 +69,11 @@ const ProjectCard = ({ project }: { project: ProjectType }) => {
           href={`/notebook/${project.id}`}
           className="text-lg font-semibold hover:underline underline-offset-4"
         >
-          {project.title}
+          {project.name}
         </Link>
         <div className="text-xs flex items-center gap-2">
           <time>
-            {new Date(project.createdAt).toLocaleString("en-US", {
+            {new Date(project.created_at).toLocaleString("en-US", {
               month: "short",
               day: "numeric",
               year: "numeric",
@@ -75,8 +83,8 @@ const ProjectCard = ({ project }: { project: ProjectType }) => {
             <Dot />
           </span>
           <span>
-            {project.sourceCount}
-            {project.sourceCount === 1 ? " Source" : " Sources"}
+            {project.sources.length}
+            {project.sources.length === 1 ? " Source" : " Sources"}
           </span>
         </div>
       </div>
@@ -87,10 +95,12 @@ const ProjectCard = ({ project }: { project: ProjectType }) => {
 const Projects = () => {
   const [sortBy, setSortBy] = useState("mostRecent");
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["projects"],
-    queryFn: projectService.getProjects,
-  });
+  const { projects } = useProjectStore();
+
+  // const { data, isLoading } = useQuery({
+  //   queryKey: ["projects"],
+  //   queryFn: projectService.getProjects,
+  // });
 
   return (
     <>
@@ -110,7 +120,7 @@ const Projects = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-auto-70 gap-4 ">
-        {data?.map((project) => {
+        {projects?.map((project) => {
           return <ProjectCard key={project.id} project={project} />;
         })}
       </div>

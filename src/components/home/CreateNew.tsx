@@ -1,22 +1,39 @@
 "use client";
 
 import { Plus } from "lucide-react";
-import { useMutation } from "@tanstack/react-query";
-import { projectService } from "@/services/project";
+import { nanoid } from "nanoid";
 import { useRouter } from "next/navigation";
+import { useProjectStore } from "@/store";
+import { Status } from "@/types";
 
 const CreateNew = () => {
   const { push } = useRouter();
-  const { mutate } = useMutation({
-    mutationFn: projectService.createProject,
-    onSuccess: (data) => {
-      push(`/notebook/${data.id}`);
-    },
-    onError: () => {},
-  });
+  const { setProjectStore } = useProjectStore();
+  // const { mutate } = useMutation({
+  //   mutationFn: projectService.createProject,
+  //   onSuccess: (data) => {
+  //     push(`/notebook/${data.id}`);
+  //   },
+  //   onError: () => {},
+  // });
 
   const createNewProject = () => {
-    mutate();
+    const project = {
+      id: nanoid(),
+      configs: {},
+      created_at: new Date(),
+      name: "New Project",
+      sources: [],
+      status: Status.CURRENT,
+      system_prompt: "",
+      topics: [],
+      updated_at: new Date(),
+    };
+    // mutate();
+    setProjectStore(({ projects }) => ({
+      projects: [...projects, project],
+    }));
+    push(`/notebook/${project.id}`);
   };
 
   return (

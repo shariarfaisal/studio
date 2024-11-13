@@ -3,7 +3,7 @@ import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Xin chào mừng bạn | Igot studio",
+    title: "Xin chào mừng bạn | Docs Studio",
   };
 }
 

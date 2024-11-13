@@ -5,7 +5,7 @@ import { Topic } from "../topic";
 // Project.ts
 export interface Project extends BaseTypes {
   name: string;
-  systemPrompt: string;
+  system_prompt: string;
   status: string;
   topics: Topic[];
   sources: Source[];
