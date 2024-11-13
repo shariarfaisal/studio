@@ -11,6 +11,7 @@ const Notebook = () => {
     tab: { active },
     sources: { openSourceDetails },
   } = useNotebook();
+  
   return (
     <>
       <Notes show={active === "notes" && !openSourceDetails} />

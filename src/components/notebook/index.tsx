@@ -5,6 +5,6 @@ export * from "./notes/TopBar";
 export * from "./notes";
 export * from "./sidebar/AddSource";
 export * from "./sidebar/ChatHistory";
-export * from "./sidebar/Sidebar";
+export * from "./sidebar";
 export * from "./Provider";
 export * from "./Notebook";
