@@ -30,7 +30,7 @@ export const useProjectStore = create(
         set({
           projects: [],
         }),
-      getProjectById: id => {
+      getProjectById: (id: string): Project | undefined => {
         const { projects } = get();
         return projects.find(project => project.id === id);
       },

@@ -5,8 +5,15 @@ import { useNotebook } from "../Provider";
 import { useMutation } from "@tanstack/react-query";
 import { notebookService } from "@/services/notebook";
 import { Button, Popconfirm } from "@/components/ui";
+import { useProjectStore } from "@/store";
+import { useState } from "react";
+import { Project, Status, Topic } from "@/types";
+import { nanoid } from "nanoid";
 
-const NotebookTopBar = () => {
+ type NotebookTopBarProps = {
+  project: Project;
+ }
+const NotebookTopBar = ({project}:NotebookTopBarProps) => {
   const {
     selectAllNote,
     deselectAllNote,
@@ -15,16 +22,17 @@ const NotebookTopBar = () => {
     addNewNote,
     deleteNotes,
   } = useNotebook();
-
-  const { mutate, isPending } = useMutation({
-    mutationKey: ["addNote"],
-    mutationFn: notebookService.addNote,
-    onSuccess: (data) => {
-      if (data) {
-        addNewNote(data);
-      }
-    },
-  });
+  const [isPending, setIsLoading] = useState(false);
+  const {setProjectStore}=useProjectStore()
+  // const { mutate, isPending } = useMutation({
+  //   mutationKey: ["addNote"],
+  //   mutationFn: notebookService.addNote,
+  //   onSuccess: (data) => {
+  //     if (data) {
+  //       addNewNote(data);
+  //     }
+  //   },
+  // });
 
   const { mutate: deleteMutate, isPending: deleteIsPending } = useMutation({
     mutationKey: ["deleteNotes"],
@@ -37,7 +45,33 @@ const NotebookTopBar = () => {
   });
 
   const addNoteHandler = () => {
-    mutate();
+    setIsLoading(true);
+    const newNote: Topic = {
+      id: nanoid(),
+      created_at: new Date(),
+      data: "",
+      name: "Untitled",
+      updated_at: new Date(),
+      status: Status.CURRENT, // or any appropriate status value
+    }
+    setProjectStore((prev) => {
+      const updatedProjects = prev.projects.map((proj) => {
+        if (proj.id === project.id) {
+          return {
+            ...proj,
+            topics: [...proj.topics, newNote],
+          };
+        }
+        return proj;
+      });
+  
+      return {
+        ...prev,
+        projects: updatedProjects,
+      };
+    });
+  
+    setIsLoading(false);
   };
 
   const deleteNotesHandler = () => {

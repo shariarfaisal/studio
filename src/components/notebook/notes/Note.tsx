@@ -1,7 +1,6 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui";
-import type { NoteType } from "@/services/models/notebook";
 import Markdown from "react-markdown";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -15,48 +14,70 @@ import {
 import { useNotebook } from "../Provider";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { useMutation } from "@tanstack/react-query";
-import { notebookService } from "@/services/notebook";
 import { useToast } from "@/hooks/use-toast";
 import { Edit3 } from "lucide-react";
 import Document from "@tiptap/extension-document";
 import Paragraph from "@tiptap/extension-paragraph";
 import Text from "@tiptap/extension-text";
 import Heading from "@tiptap/extension-heading";
+import { Topic} from "@/types";
+import { useProjectStore } from "@/store";
+import { useParams } from "next/navigation";
 
-function NoteTitle({ note }: { note: NoteType }) {
+function NoteTitle({ note,editable }: { note: Topic,editable:boolean }) {
+  const {id}=useParams()
   const { updateNote } = useNotebook();
   const { toast } = useToast();
   const [edit, setEdit] = useState(false);
-  const [title, setTitle] = useState(note.title);
-  const { mutate, isPending } = useMutation({
-    mutationKey: ["updateNote"],
-    mutationFn: notebookService.updateNote,
-    onSuccess: (data) => {
-      console.log(data);
-      updateNote(data);
-      setEdit(false);
-    },
-    onError: (err) => {
-      console.log(err);
-      toast({
-        title: "Error",
-        description: err.message,
-      });
-    },
-  });
+  const [isPending, setIsLoading] = useState(false);
+  const [title, setTitle] = useState(note.name);
+  const {setProjectStore}=useProjectStore()
+  // const { mutate, isPending } = useMutation({
+  //   mutationKey: ["updateNote"],
+  //   mutationFn: notebookService.updateNote,
+  //   onSuccess: (data) => {
+  //     console.log(data);
+  //     updateNote(data);
+  //     setEdit(false);
+  //   },
+  //   onError: (err) => {
+  //     console.log(err);
+  //     toast({
+  //       title: "Error",
+  //       description: err.message,
+  //     });
+  //   },
+  // });
 
+ 
   const onSubmit = () => {
-    mutate({
-      id: note.id,
-      payload: {
-        title: title,
-        content: note.content,
-      },
+    setIsLoading(true);
+    setProjectStore((prev) => {
+      const updatedProjects = prev.projects.map((proj) => {
+        if (proj.id === id as string) {
+          const updatedTopics = proj.topics.map((topic) =>
+            topic.id === note.id ? { ...topic, name: title,data: note.data} : topic
+          );
+          return {
+            ...proj,
+            topics: updatedTopics,
+          };
+        }
+        return proj;
+      });
+
+      return {
+        ...prev,
+        projects: updatedProjects,
+      };
     });
+
+    setIsLoading(false);
+    setEdit(false);
   };
 
-  if (edit && note.editable) {
+
+  if (edit && editable) {
     return (
       <Input
         className="w-[calc(100%-40px)]"
@@ -76,22 +97,29 @@ function NoteTitle({ note }: { note: NoteType }) {
     <>
       <CardTitle
         onClick={() => {
-          if (note.editable) {
+          if (editable) {
             setEdit(true);
           }
         }}
         className={`w-[calc(100%-40px)] text-lg font-medium ${
-          note.editable ? "cursor-pointer hover:opacity-80" : ""
+          editable ? "cursor-pointer hover:opacity-80" : ""
         }`}
       >
-        {note.title}
+        {note.name}
       </CardTitle>
     </>
   );
 }
 
-const Note = ({ note, selected }: { note: NoteType; selected: boolean }) => {
+type NoteProps = {
+  note: Topic,
+  selected: boolean
+};
+
+export const Note = ({note,selected}:NoteProps) => {
   const { toggleSelectNote } = useNotebook();
+  const [editable, setEditable] = useState(true)
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -102,8 +130,8 @@ const Note = ({ note, selected }: { note: NoteType; selected: boolean }) => {
         levels: [1, 2, 3],
       }),
     ],
-    content: note.content,
-    editable: note.editable,
+    content: note.data,
+    editable: editable,
     autofocus: true,
     injectCSS: false,
     onUpdate: () => {},
@@ -113,13 +141,13 @@ const Note = ({ note, selected }: { note: NoteType; selected: boolean }) => {
     <Card className="max-h-[300px] overflow-hidden shadow-none border-2 border-gray-200">
       <CardHeader className="w-full bg-background flex flex-row justify-between items-start">
         <div className="w-full flex flex-col">
-          {note.editable && (
+          {note && editable && (
             <div className="flex gap-2 items-center text-zinc-600 text-sm">
               <Edit3 className="w-4 h-4" />
               <span>Edit Note</span>
             </div>
           )}
-          <NoteTitle note={note} />
+          <NoteTitle note={note} editable={editable} />
         </div>
         <input
           id={`note-${note.id}`}
@@ -138,18 +166,18 @@ const Note = ({ note, selected }: { note: NoteType; selected: boolean }) => {
       <Dialog>
         <DialogTrigger asChild>
           <CardContent className="text-sm partial-text h-[200px] cursor-pointer">
-            <Markdown>{note.content}</Markdown>
+            <Markdown>{note.data}</Markdown>
           </CardContent>
         </DialogTrigger>
         <DialogContent className="sm:max-w-2xl">
           <DialogHeader>
-            <DialogTitle>{note.title}</DialogTitle>
+            <DialogTitle>{note.name}</DialogTitle>
           </DialogHeader>
           <div className="text-sm min-h-[200px] max-h-[400px] overflow-x-hidden scroll-y text-wrap">
-            {note.editable ? (
+            {editable ? (
               <EditorContent editor={editor} />
             ) : (
-              <Markdown className="text-wrap">{note.content}</Markdown>
+              <Markdown className="text-wrap">{note.data}</Markdown>
             )}
           </div>
         </DialogContent>
@@ -158,4 +186,4 @@ const Note = ({ note, selected }: { note: NoteType; selected: boolean }) => {
   );
 };
 
-export default Note;
+
