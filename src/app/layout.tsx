@@ -4,7 +4,7 @@ import Providers from "./Providers";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: "Igot studio",
+  title: "Docs Studio",
 };
 
 export default function RootLayout({

@@ -7,7 +7,7 @@ export default function Home() {
       <div className="w-full max-w-[1000px] mx-auto ">
         <div className="w-full pt-10 pb-5">
           <h1 className="text-4xl xl:text-6xl font-bold text-gradient-red-to-blue ">
-            Welcome to Igot Studio
+            Welcome to Docs Studio
           </h1>
         </div>
         <div className="w-full flex flex-col gap-5">
