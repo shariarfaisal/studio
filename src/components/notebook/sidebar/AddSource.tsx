@@ -18,23 +18,56 @@ import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useNotebook } from "../Provider";
 import { Input } from "@/components/ui/input";
+import { useParams } from "next/navigation";
+import { useProjectStore } from "@/store";
+import { UPLOAD_API } from "@/services";
+import { nanoid } from "nanoid";
+import { parseFileResponse } from "@/utils";
+import { Source } from "@/types";
 
 const AddFile = () => {
-  const onDrop = useCallback((acceptedFiles) => {
-    acceptedFiles.forEach((file) => {
-      const reader = new FileReader();
+  const { id } = useParams();
+  const { setProjectStore } = useProjectStore();
+  const onDrop = useCallback(
+    async (acceptedFiles: File[]) => {
+      const files = await Promise.all(
+        acceptedFiles.map((file) => {
+          const session_id = nanoid();
+          const formData = new FormData();
+          formData.append("file", file);
+          return UPLOAD_API.uploadWorkflowFile({
+            session_id,
+            file: formData,
+          });
+        })
+      );
 
-      reader.onabort = () => console.log("file reading was aborted");
-      reader.onerror = () => console.log("file reading has failed");
+      setProjectStore(({ projects }) => {
+        const sources: Source[] = files.map(
+          (f) =>
+            ({
+              id: nanoid(),
+              file: parseFileResponse(f.prompt),
+            } as Source)
+        );
 
-      reader.onload = () => {
-        // Do whatever you want with the file contents
-        const binaryStr = reader.result;
-        console.log(binaryStr);
-      };
-      reader.readAsArrayBuffer(file);
-    });
-  }, []);
+        const project = projects.find((p) => p.id === id);
+        if (!project) return { projects };
+        return {
+          projects: projects.map((p) =>
+            p.id === id
+              ? {
+                  ...p,
+                  sources: [...p.sources, ...sources],
+                }
+              : p
+          ),
+        };
+      });
+    },
+    [id, setProjectStore]
+  );
+
   const {
     getRootProps,
     getInputProps,
@@ -46,7 +79,7 @@ const AddFile = () => {
       className="w-full min-h-[200px] border-dashed border-2 border-gray-200 flex flex-col gap-3 justify-center items-center rounded-xl"
       {...getRootProps()}
     >
-      <input {...getInputProps()} accept=".pdf, .txt, .md, .mp3" />
+      <input {...getInputProps()} accept=".pdf, .xls, .xlsx, .csv" />
 
       <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
         <UploadIcon />
@@ -63,7 +96,7 @@ const AddFile = () => {
         <span>to upload</span>
       </p>
       <p className="text-sm text-gray-500">
-        Supported file types: PDF, .txt, Markdown, Audio (e.g. mp3)
+        Supported file types: PDF, XLS, XLSX, CSV
       </p>
     </div>
   );

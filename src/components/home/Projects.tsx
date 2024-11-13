@@ -40,7 +40,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
     <div
       onClick={() => {
         if (!menuOpen) {
-          push(`/notebook/${project.id}`);
+          push(`/projects/${project.id}`);
         }
       }}
       className="border min-h-[12rem] rounded-xl p-4 flex flex-col bg-project-card lg:max-w-[300px] relative cursor-pointer"
@@ -66,7 +66,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
 
       <div className="mt-auto space-y-2">
         <Link
-          href={`/notebook/${project.id}`}
+          href={`/projects/${project.id}`}
           className="text-lg font-semibold hover:underline underline-offset-4"
         >
           {project.name}
