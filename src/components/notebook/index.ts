@@ -1,6 +1,6 @@
 export * from "./chat/chats";
 export * from "./chat";
-export * from "./notes/note";
+export * from "./notes/NoteInfo";
 export * from "./notes/top-bar";
 export * from "./notes";
 export * from "./sidebar";

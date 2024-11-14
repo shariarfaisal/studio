@@ -3,7 +3,7 @@
 import NotebookTopBar from "./top-bar";
 import { useNotebook } from "../NotebookProvider";
 import { Project } from "@/types";
-import { Note } from "./note";
+import { Note } from "./NoteInfo";
 
 type INotesProps = {
   show: boolean;
