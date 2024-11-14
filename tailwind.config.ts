@@ -1,5 +1,17 @@
 import type { Config } from "tailwindcss";
 
+type Utility = {
+  [key: string]: {
+    [key: string]:
+      | string
+      | {
+          [key: string]: string;
+        };
+  };
+};
+
+type AddUtilitiesFunction = (utilities: Utility) => void;
+
 const config: Config = {
   darkMode: ["class"],
   content: [
@@ -82,8 +94,9 @@ const config: Config = {
     },
   },
   plugins: [
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     require("tailwindcss-animate"),
-    function ({ addUtilities }) {
+    function ({ addUtilities }: { addUtilities: AddUtilitiesFunction }) {
       addUtilities({
         ".no-scrollbar": {
           /* Hide scrollbar for Chrome, Safari and Opera */

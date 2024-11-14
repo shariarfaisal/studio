@@ -1,7 +1,7 @@
-'use client';
-import { useDebounce, useEditor } from '@/hooks';
-import 'quill/dist/quill.snow.css';
-import React, { useEffect, useState } from 'react';
+"use client";
+import { useEditor } from "@/hooks";
+import "quill/dist/quill.snow.css";
+import React, { useEffect } from "react";
 
 type EditorProps = {
   onChange: (value: string) => void;
@@ -14,7 +14,7 @@ export const Editor = ({ value, onChange, onBlur }: EditorProps) => {
 
   useEffect(() => {
     if (quill) {
-      quill.on('text-change', () => {
+      quill.on("text-change", () => {
         const contentPreview = quill.root.innerHTML;
         onChange(contentPreview);
       });
@@ -23,14 +23,14 @@ export const Editor = ({ value, onChange, onBlur }: EditorProps) => {
 
   useEffect(() => {
     if (quill && value !== quill.root.innerHTML) {
-      quill.clipboard.dangerouslyPasteHTML(value || '');
+      quill.clipboard.dangerouslyPasteHTML(value || "");
     }
   }, [quill, value]);
 
   return (
     <div>
       <div
-        className='w-full z-50 border border-default-200 h-[250px]'
+        className="w-full z-50 border border-default-200 h-[250px]"
         ref={quillRef}
         onBlur={onBlur}
       ></div>

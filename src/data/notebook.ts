@@ -1,4 +1,5 @@
-import { NoteType, PromptType, SourceType } from "@/services/models/notebook";
+import { NoteType, PromptType } from "@/services/models/notebook";
+import { Source } from "@/types";
 
 const demoTranscript = `Thematic Outline: Unclear Text Analysis I. Problem: Deciphering the meaning and purpose of a text with limited context.
 
@@ -31,80 +32,7 @@ A. Current State: Impossibility of definitive analysis without further informati
 
 B. Call to Action: Acquiring the necessary context and author information to proceed with interpretation.`;
 
-export const sources: SourceType[] = [
-  {
-    title: "Source 1",
-    id: "1",
-    transcript: demoTranscript,
-    summary: demoTranscript,
-    createdAt: "2022-01-01T00:00:00.000Z",
-    updatedAt: "2022-01-01T00:00:00.000Z",
-  },
-  {
-    title: "Source 2",
-    id: "2",
-    transcript: demoTranscript,
-    summary: demoTranscript,
-    createdAt: "2022-01-01T00:00:00.000Z",
-    updatedAt: "2022-01-01T00:00:00.000Z",
-  },
-  {
-    title: "Source 3",
-    id: "3",
-    transcript: demoTranscript,
-    summary: demoTranscript,
-    createdAt: "2022-01-01T00:00:00.000Z",
-    updatedAt: "2022-01-01T00:00:00.000Z",
-  },
-  {
-    title: "Source 4",
-    id: "4",
-    transcript: demoTranscript,
-    summary: demoTranscript,
-    createdAt: "2022-01-01T00:00:00.000Z",
-    updatedAt: "2022-01-01T00:00:00.000Z",
-  },
-  {
-    title: "Source 5",
-    id: "5",
-    transcript: demoTranscript,
-    summary: demoTranscript,
-    createdAt: "2022-01-01T00:00:00.000Z",
-    updatedAt: "2022-01-01T00:00:00.000Z",
-  },
-  {
-    title: "Source 6",
-    id: "6",
-    transcript: demoTranscript,
-    summary: demoTranscript,
-    createdAt: "2022-01-01T00:00:00.000Z",
-    updatedAt: "2022-01-01T00:00:00.000Z",
-  },
-  {
-    title: "Source 7",
-    id: "7",
-    transcript: demoTranscript,
-    summary: demoTranscript,
-    createdAt: "2022-01-01T00:00:00.000Z",
-    updatedAt: "2022-01-01T00:00:00.000Z",
-  },
-  {
-    title: "Source 8",
-    id: "8",
-    transcript: demoTranscript,
-    summary: demoTranscript,
-    createdAt: "2022-01-01T00:00:00.000Z",
-    updatedAt: "2022-01-01T00:00:00.000Z",
-  },
-  {
-    title: "Source 9",
-    id: "9",
-    transcript: demoTranscript,
-    summary: demoTranscript,
-    createdAt: "2022-01-01T00:00:00.000Z",
-    updatedAt: "2022-01-01T00:00:00.000Z",
-  },
-];
+export const sources: Source[] = [];
 
 export const prompts: PromptType[] = [
   {

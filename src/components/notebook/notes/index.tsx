@@ -2,7 +2,6 @@
 
 import NotebookTopBar from "./top-bar";
 import { useNotebook } from "../provider";
-import { useEffect } from "react";
 import { Project } from "@/types";
 import { Note } from "./note";
 

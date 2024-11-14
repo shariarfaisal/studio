@@ -1,6 +1,6 @@
 export enum FLOW_FUNC {
-  BOT = 'BOT',
-  IDEATION = 'IDEATION',
+  BOT = "BOT",
+  IDEATION = "IDEATION",
 }
 
 export interface Snapshot {
@@ -30,7 +30,7 @@ export interface Task {
   order: number;
   depend_task_order: number[];
   ref: string;
-  topics: any[];
+  topics: unknown[];
   usages: number;
   task_config: TaskConfig;
   tool_name: string;
@@ -44,7 +44,7 @@ interface Action {
   type: string;
   content: string;
   goal: string;
-  status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
+  status: "DRAFT" | "PUBLISHED" | "ARCHIVED";
 }
 
 interface TaskConfig {

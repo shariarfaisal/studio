@@ -5,15 +5,6 @@ export type NotebookType = {
   updatedAt: string;
 };
 
-export type SourceType = {
-  id: string;
-  title: string;
-  transcript: string;
-  summary: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
 export type NoteType = {
   id: string;
   title: string;

@@ -12,8 +12,8 @@ import {
   NotebookType,
   NoteType,
   PromptType,
-  SourceType,
 } from "@/services/models/notebook";
+import { Source } from "@/types";
 
 type TabType = "notes" | "chats";
 
@@ -23,10 +23,10 @@ export type NotebookState = {
   };
   sources: {
     isLoading: boolean;
-    data: SourceType[];
+    data: Source[];
     error: string;
     selected: string[];
-    openSourceDetails: SourceType | null;
+    openSourceDetails: Source | null;
   };
   notes: {
     isLoading: boolean;
@@ -223,7 +223,7 @@ export const reducer = (
     case Types.SET_SOURCES_DATA:
       return {
         ...state,
-        sources: { ...state.sources, data: action.payload as SourceType[] },
+        sources: { ...state.sources, data: action.payload as Source[] },
       };
     case Types.SET_SOURCES_ERROR:
       return {
@@ -231,10 +231,10 @@ export const reducer = (
         sources: { ...state.sources, error: action.payload as string },
       };
     case Types.ADD_NEW_SOURCE:
-      state.sources.data.push(action.payload as SourceType);
+      state.sources.data.push(action.payload as Source);
       return { ...state };
     case Types.UPDATE_SOURCE:
-      const sourcePayload = action.payload as SourceType;
+      const sourcePayload = action.payload as Source;
       if (sourcePayload) {
         const source = state.sources.data.find(
           (source) => source.id === sourcePayload.id
@@ -257,7 +257,7 @@ export const reducer = (
         ...state,
         sources: {
           ...state.sources,
-          openSourceDetails: action.payload as SourceType,
+          openSourceDetails: action.payload as Source,
         },
       };
     case Types.SELECT_SOURCE:
@@ -342,13 +342,13 @@ type NotebookContextType = NotebookState & {
   deselectAllNote: () => void;
   updateNote: (note: NoteType) => void;
   setNotes: (notes: NoteType[]) => void;
-  setSources: (sources: SourceType[]) => void;
+  setSources: (sources: Source[]) => void;
   setPrompts: (prompts: PromptType[]) => void;
   setNotebook: (notebook: NotebookType) => void;
   addNewNote: (note: NoteType) => void;
   deleteNotes: (ids: string[]) => void;
   isAllNotesSelected: boolean;
-  openSourceDetails: (source: any) => void;
+  openSourceDetails: (source: Source | null) => void;
   closeSourceDetails: () => void;
   toggleSource: (id: string) => void;
   selectSource: (id: string) => void;
@@ -404,7 +404,7 @@ export default function NotebookProvider({
     });
   };
 
-  const setSources = (sources: SourceType[]) => {
+  const setSources = (sources: Source[]) => {
     dispatch({
       type: Types.SET_SOURCES_DATA,
       payload: sources,
@@ -472,7 +472,7 @@ export default function NotebookProvider({
     });
   };
 
-  const openSourceDetails = (source: SourceType | any) => {
+  const openSourceDetails = (source: Source | null) => {
     dispatch({
       type: Types.OPEN_SOURCE_DETAILS,
       payload: source,

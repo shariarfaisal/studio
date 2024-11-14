@@ -4,8 +4,8 @@ import {
   NotebookType,
   NoteType,
   PromptType,
-  SourceType,
 } from "./models/notebook";
+import { Source } from "@/types";
 
 export const notebookService = {
   getNotebook: async (): Promise<NotebookType> => {
@@ -20,7 +20,7 @@ export const notebookService = {
       }, 100);
     });
   },
-  getSources: async (): Promise<SourceType[]> => {
+  getSources: async (): Promise<Source[]> => {
     return await new Promise((resolve) => {
       setTimeout(() => {
         resolve(sources);
@@ -115,13 +115,10 @@ export const notebookService = {
       }, 1000);
     });
   },
-  addSource: async (payload: unknown): Promise<SourceType> => {
+  addSource: async (payload: Source): Promise<Source> => {
     return await new Promise((resolve) => {
       setTimeout(() => {
-        console.log(payload);
-        const newSource = sources[0];
-        newSource.title = "New Source";
-        newSource.id = new Date().toString();
+        const newSource = payload;
         resolve(newSource);
       }, 1000);
     });
@@ -133,7 +130,7 @@ export const notebookService = {
     payload: {
       title: string;
     };
-  }): Promise<SourceType> => {
+  }): Promise<Source> => {
     return await new Promise((resolve, reject) => {
       setTimeout(() => {
         const source = sources.find((s) => s.id === id);
@@ -150,7 +147,7 @@ export const notebookService = {
   }: {
     id: string;
     notebookId: string;
-  }): Promise<SourceType> => {
+  }): Promise<Source> => {
     return await new Promise((resolve, reject) => {
       setTimeout(() => {
         const source = sources.find((s) => s.id === id);
