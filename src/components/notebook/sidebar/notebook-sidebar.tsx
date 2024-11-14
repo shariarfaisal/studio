@@ -9,6 +9,7 @@ import { Button, SidebarMenu, SidebarMenuItem } from "@/components/ui";
 import { useProjectStore } from "@/store";
 import { useParams } from "next/navigation";
 import { AddSource } from "./add-source";
+import { useWorkflow } from "@/hooks";
 
 function LoadingItems() {
   return (
@@ -50,6 +51,7 @@ export const NotebookSidebar = () => {
     openSourceDetails,
   } = useNotebook();
   const { id } = useParams();
+  const { fileIndexing } = useWorkflow();
   // const { data, isLoading } = useQuery({
   //   queryKey: ["sources"],
   //   queryFn: notebookService.getSources,
@@ -117,7 +119,21 @@ export const NotebookSidebar = () => {
           ))}
         </div>
         {isLoading && <LoadingItems />}
-        <Button>Start Index</Button>
+        <Button
+          disabled={sources.selected.length === 0}
+          onClick={() => {
+            fileIndexing({
+              prompt: "START",
+              session_id: id as string,
+              files:
+                project?.sources
+                  ?.filter((source) => sources.selected.includes(source.id))
+                  ?.map((source) => source.file) || [],
+            });
+          }}
+        >
+          Start Indexing
+        </Button>
       </SidebarMenu>
     </div>
   );

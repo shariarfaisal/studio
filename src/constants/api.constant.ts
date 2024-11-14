@@ -1,5 +1,6 @@
 export const API_URLS = {
-  BASE_API_URL: process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1/thanh-uy",
+  BASE_API_URL:
+    process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL || "http://127.0.0.1/thanh-uy",
   UPLOAD_WORKFLOW_FILE: "/v1/w_file",
   LOGIN: "/api/auth/login",
   REGISTER: "/api/users",
@@ -14,7 +15,7 @@ export const API_URLS = {
   SEND_WORKFLOW_PROMPT: "/v1/w_prompt",
   CHAT_PROMPT: "/v1/prompt",
   CHAT: "/v1/chat",
-  SSE_LISTENER: process.env.NEXT_PUBLIC_API_URL + "/sse/sub",
+  SSE_LISTENER: process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL + "/sse/sub",
 };
 
 export enum SCROLL_DIRECTION {
