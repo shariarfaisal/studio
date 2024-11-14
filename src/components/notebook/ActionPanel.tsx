@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui";
 
-const ActionPanel = () => {
+export const ActionPanel = () => {
   const {
     setActiveTab,
     tab: { active },
@@ -49,4 +49,4 @@ const ActionPanel = () => {
   );
 };
 
-export default ActionPanel;
+

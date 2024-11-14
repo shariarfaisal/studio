@@ -1,24 +1,38 @@
 "use client";
 
-import ActionPanel from "./ActionPanel";
+
 import Notes from "./notes";
 import NotebookChat from "./chat";
 import { useNotebook } from "./Provider";
 import SourceDetails from "./SourceDetails";
+import { useParams } from "next/navigation";
+import { useProjectStore } from "@/store";
+import { ActionPanel } from "./actionPanel";
+import { useEffect, useState } from "react";
+import { Project } from "@/types";
 
-const Notebook = () => {
+export const Notebook = () => {
   const {
     tab: { active },
     sources: { openSourceDetails },
   } = useNotebook();
+  const {id}=useParams()
+  const [isLoading, setIsLoading] = useState(true);
+  const {getProjectById}=useProjectStore()
+  const project = getProjectById(id as string) 
+  useEffect(() => {
+    if (project) {
+      setIsLoading(false);
+    }
+  }, [project]);
   return (
     <>
-      <Notes show={active === "notes" && !openSourceDetails} />
-      <NotebookChat show={active === "chats" && !openSourceDetails} />
+      <Notes show={active === "notes" && !openSourceDetails} {...{project:project as Project,isLoading}} />
+      <NotebookChat show={active === "chats" && !openSourceDetails}  {...{project,isLoading}}/>
       {openSourceDetails && <SourceDetails />}
       <ActionPanel />
     </>
   );
 };
 
-export default Notebook;
+

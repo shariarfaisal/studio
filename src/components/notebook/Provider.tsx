@@ -348,7 +348,7 @@ type NotebookContextType = NotebookState & {
   addNewNote: (note: NoteType) => void;
   deleteNotes: (ids: string[]) => void;
   isAllNotesSelected: boolean;
-  openSourceDetails: (source: SourceType) => void;
+  openSourceDetails: (source: any) => void;
   closeSourceDetails: () => void;
   toggleSource: (id: string) => void;
   selectSource: (id: string) => void;
@@ -472,7 +472,7 @@ export default function NotebookProvider({
     });
   };
 
-  const openSourceDetails = (source: SourceType) => {
+  const openSourceDetails = (source: SourceType | any) => {
     dispatch({
       type: Types.OPEN_SOURCE_DETAILS,
       payload: source,

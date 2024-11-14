@@ -1,13 +1,14 @@
 "use client";
 import { FileText } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
-import { notebookService } from "@/services/notebook";
+
 import { useNotebook } from "../Provider";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ContentLoader from "react-content-loader";
-import AddSource from "./AddSource";
 import ChatHistory from "./ChatHistory";
 import { SidebarMenu, SidebarMenuItem } from "@/components/ui";
+import { useProjectStore } from "@/store";
+import { useParams } from "next/navigation";
+import { AddSource } from "./AddSource";
 
 function LoadingItems() {
   return (
@@ -38,7 +39,7 @@ function LoadingItems() {
   );
 }
 
-const NotebookSidebar = () => {
+export const NotebookSidebar = () => {
   const {
     sources,
     toggleSource,
@@ -48,16 +49,24 @@ const NotebookSidebar = () => {
     setSources,
     openSourceDetails,
   } = useNotebook();
-  const { data, isLoading } = useQuery({
-    queryKey: ["sources"],
-    queryFn: notebookService.getSources,
-  });
+  const {id}=useParams()
+  // const { data, isLoading } = useQuery({
+  //   queryKey: ["sources"],
+  //   queryFn: notebookService.getSources,
+  // });
+    
+  const [isLoading, setIsLoading] = useState(true);
+
+  
+
+  const {getProjectById}=useProjectStore()
+  const project=getProjectById(id as string)
 
   useEffect(() => {
-    if (data) {
-      setSources(data);
+    if (project) {
+      setIsLoading(false);
     }
-  }, [data]);
+  }, [project]);
 
   return (
     <div className="p-2.5 flex flex-col gap-3">
@@ -90,15 +99,15 @@ const NotebookSidebar = () => {
           </div>
         </div>
         <div className=" flex flex-col gap-2 max-h-[15rem] scroll-y pr-2">
-          {data?.map((item) => (
+          {project?.sources?.map((item) => (
             <SidebarMenuItem
-              key={item.title}
-              onClick={() => openSourceDetails(item)}
+              key={item.id}
+              onClick={() => openSourceDetails(item.file)}
               className="rounded-xl h-12 flex justify-between items-center transition-all duration-150 ease-in-out"
             >
               <div className="h-full flex items-center gap-2 cursor-pointer md:text-base font-medium hover:opacity-80 hover:underline">
                 <FileText className="w-4 h-4" />
-                <span className="">{item.title}</span>
+                <span className="">{item.file.filename}</span>
               </div>
               <input
                 type="checkbox"
@@ -115,4 +124,4 @@ const NotebookSidebar = () => {
   );
 };
 
-export default NotebookSidebar;
+
