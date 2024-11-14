@@ -53,11 +53,11 @@ export default function NotebookSidebar() {
     queryFn: notebookService.getSources,
   });
 
-  useEffect(() => {
-    if (data) {
-      setSources(data);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     setSources(data);
+  //   }
+  // }, [data]);
 
   return (
     <div className="p-2.5 flex flex-col gap-3">
