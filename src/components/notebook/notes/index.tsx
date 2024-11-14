@@ -26,7 +26,7 @@ const Notes = ({ isLoading, project, show }: INotesProps) => {
       <NotebookTopBar {...{ project }} />
       <div className="p-4 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 min-h-[calc(100vh-180px)]">
         {isLoading && <div>Loading...</div>}
-        {project.topics.map((note) => (
+        {project?.topics?.map((note) => (
           <Note
             key={note.id}
             note={note}
