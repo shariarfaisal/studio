@@ -4,7 +4,7 @@ export * from "./notes/note";
 export * from "./notes/top-bar";
 export * from "./notes";
 export * from "./sidebar";
-export * from "./sidebar/ChatHistory";
+export * from "./sidebar/chat-history";
 export * from "./sidebar";
 export * from "./provider";
 export * from "./notebook";

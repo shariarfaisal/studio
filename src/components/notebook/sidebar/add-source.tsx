@@ -34,51 +34,53 @@ const AddFile = ({ handleModalClose }: IAddFileProps) => {
 
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
-      const files = await Promise.all(
-        acceptedFiles.map((file) => {
-          const session_id = nanoid();
-          const formData = new FormData();
-          formData.append("file", file);
-          return UPLOAD_API.uploadWorkflowFile({
-            session_id,
-            file: formData,
-          });
-        })
-      );
-
-      setProjectStore(({ projects }) => {
-        const sources: Source[] = files.map(
-          (f) =>
-            ({
-              id: nanoid(),
-              file: parseFileResponse(f.prompt),
-            } as Source)
+      try {
+        const files = await Promise.all(
+          acceptedFiles.map((file) => {
+            const session_id = nanoid();
+            const formData = new FormData();
+            formData.append("file", file);
+            return UPLOAD_API.uploadWorkflowFile({
+              session_id,
+              file: formData,
+            });
+          })
         );
 
-        const project = projects.find((p) => p.id === id);
-        if (!project) return { projects };
+        setProjectStore(({ projects }) => {
+          const sources: Source[] = files.map(
+            (f) =>
+              ({
+                id: nanoid(),
+                file: parseFileResponse(f.prompt),
+              } as Source)
+          );
 
-        return {
-          projects: projects.map((p) =>
-            p.id === id
-              ? {
-                  ...p,
-                  sources: [...p.sources, ...sources],
-                }
-              : p
-          ),
-        };
-      });
-      handleModalClose();
+          const project = projects.find((p) => p.id === id);
+          if (!project) return { projects };
+
+          return {
+            projects: projects.map((p) =>
+              p.id === id
+                ? {
+                    ...p,
+                    sources: [...p.sources, ...sources],
+                  }
+                : p
+            ),
+          };
+        });
+      } catch (error) {
+        console.error(error);
+      } finally {
+        handleModalClose();
+      }
     },
-    [handleModalClose, id, setProjectStore]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [id]
   );
 
-  const {
-    getRootProps,
-    getInputProps,
-    open: fileOpen,
-  } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
     <div
@@ -93,12 +95,7 @@ const AddFile = ({ handleModalClose }: IAddFileProps) => {
       <h2 className="text-2xl font-medium">Upload Sources</h2>
       <p className="text-xl text-gray-500">
         <span>Drag & drop or</span>
-        <strong
-          className="cursor-pointer px-2 text-center"
-          onClick={() => fileOpen()}
-        >
-          choose file
-        </strong>
+        <strong className="cursor-pointer px-2 text-center">choose file</strong>
         <span>to upload</span>
       </p>
       <p className="text-sm text-gray-500">
@@ -186,9 +183,10 @@ export const AddSource = () => {
   const [open, setOpen] = useState(false);
 
   const [tool, setTool] = useState<"file" | "link" | "text">("file");
-  const handleModalClose = () => {
+  const handleModalClose = useCallback(() => {
     setOpen(false);
-  };
+  }, []);
+
   return (
     <div>
       <Dialog open={open} onOpenChange={setOpen}>
@@ -221,7 +219,7 @@ export const AddSource = () => {
             {tool === "file" && (
               <>
                 <AddFile {...{ handleModalClose }} />
-                <div className="w-full flex flex-col sm:flex-row gap-3">
+                {/* <div className="w-full flex flex-col sm:flex-row gap-3">
                   <div className="border p-3 rounded-xl min-h-[150px] min-w-[200px] flex flex-col gap-3">
                     <div className="flex gap-3 items-center">
                       <Link className="w-4 h-4" />
@@ -259,7 +257,7 @@ export const AddSource = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className="w-full p-3 flex gap-3 items-center h-16 rounded-xl bg-gray-100 border">
                   <p className="text-sm text-gray-500 whitespace-nowrap">
                     Source Limit

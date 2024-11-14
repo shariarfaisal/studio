@@ -4,11 +4,11 @@ import { FileText } from "lucide-react";
 import { useNotebook } from "../provider";
 import { useEffect, useState } from "react";
 import ContentLoader from "react-content-loader";
-import ChatHistory from "./ChatHistory";
+import ChatHistory from "./chat-history";
 import { SidebarMenu, SidebarMenuItem } from "@/components/ui";
 import { useProjectStore } from "@/store";
 import { useParams } from "next/navigation";
-import { AddSource } from "./AddSource";
+import { AddSource } from "./add-source";
 
 function LoadingItems() {
   return (
