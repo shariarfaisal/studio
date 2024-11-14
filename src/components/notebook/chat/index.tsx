@@ -56,7 +56,6 @@ const NotebookChat = ({ show }: { show: boolean }) => {
     queryKey: ["chats"],
     queryFn: notebookService.getChats,
   });
-  console.log("🚀 ~ NotebookChat ~ data:", data);
 
   return (
     <div
@@ -85,7 +84,9 @@ const NotebookChat = ({ show }: { show: boolean }) => {
         </div>
       </div>
       <div className="h-[calc(100vh-180px)]">
-        <div className="p-4">{data && <Chats data={data} />}</div>
+        <div className="p-4">
+          <Chats />
+        </div>
         {/* <InitialDisplay /> */}
       </div>
     </div>

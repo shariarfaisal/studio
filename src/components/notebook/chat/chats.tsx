@@ -1,13 +1,17 @@
 "use client";
 
 import { ChatMessageType } from "@/services/models/notebook";
+import { useChatStore } from "@/store";
 import { copyTextToClipboard } from "@/utils";
 import Markdown from "react-markdown";
 
-const Chats = ({ data = [] }: { data: ChatMessageType[] }) => {
+const Chats = () => {
+  const { conversations, typingResponse } = useChatStore();
+  console.log("🚀 ~ Chats ~ typingResponse:", typingResponse);
+
   return (
     <div className="w-full flex flex-col gap-5 py-3">
-      {data.map((m) => {
+      {conversations.map((m) => {
         if (m.role === "user") {
           return (
             <div key={m.id} className="flex justify-end">
@@ -47,13 +51,20 @@ const Chats = ({ data = [] }: { data: ChatMessageType[] }) => {
       })}
 
       {/* Generating response... */}
-      <div className="w-full pl-12">
-        <div className="loading text-slate-500 dark:text-slate-400">
-          <span className="text-title">&#8226;</span>
-          <span className="text-title">&#8226;</span>
-          <span className="text-title">&#8226;</span>
+      {typingResponse && (
+        <div className="w-full pl-12">
+          <Markdown>{typingResponse}</Markdown>
         </div>
-      </div>
+      )}
+      {typingResponse && (
+        <div className="w-full pl-12">
+          <div className="loading text-slate-500 dark:text-slate-400">
+            <span className="text-title">&#8226;</span>
+            <span className="text-title">&#8226;</span>
+            <span className="text-title">&#8226;</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
