@@ -5,7 +5,7 @@ import { useNotebook } from '../provider';
 import { useEffect, useState } from 'react';
 import ContentLoader from 'react-content-loader';
 import ChatHistory from './chat-history';
-import { SidebarMenu, SidebarMenuItem } from '@/components/ui';
+import { Button, SidebarMenu, SidebarMenuItem } from '@/components/ui';
 import { useProjectStore } from '@/store';
 import { useParams } from 'next/navigation';
 import { AddSource } from './add-source';
@@ -117,6 +117,9 @@ export const NotebookSidebar = () => {
           ))}
         </div>
         {isLoading && <LoadingItems />}
+         <Button variant='outline' >
+          ReIndex
+         </Button>
       </SidebarMenu>
     </div>
   );
