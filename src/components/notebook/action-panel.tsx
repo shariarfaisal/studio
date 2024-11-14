@@ -2,7 +2,7 @@
 
 import { SendHorizonal } from "lucide-react";
 import { Button } from "../ui/button";
-import { useNotebook } from "./Provider";
+import { useNotebook } from "./provider";
 import {
   Select,
   SelectContent,
@@ -48,5 +48,3 @@ export const ActionPanel = () => {
     </div>
   );
 };
-
-

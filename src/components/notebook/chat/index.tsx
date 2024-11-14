@@ -4,7 +4,7 @@ import { Button } from "@/components/ui";
 import { notebookService } from "@/services/notebook";
 import { useQuery } from "@tanstack/react-query";
 import { Edit, X } from "lucide-react";
-import { useNotebook } from "../Provider";
+import { useNotebook } from "../provider";
 import Chats from "./Chats";
 
 const InitialDisplay = () => {

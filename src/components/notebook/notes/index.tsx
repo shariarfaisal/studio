@@ -1,11 +1,10 @@
-'use client';
+"use client";
 
-import NotebookTopBar from './TopBar';
-import { useNotebook } from '../Provider';
-import { useEffect } from 'react';
-import { Project } from '@/types';
-import { Note } from './note';
-
+import NotebookTopBar from "./top-bar";
+import { useNotebook } from "../provider";
+import { useEffect } from "react";
+import { Project } from "@/types";
+import { Note } from "./note";
 
 type INotesProps = {
   show: boolean;
@@ -21,13 +20,13 @@ const Notes = ({ isLoading, project, show }: INotesProps) => {
   return (
     <div
       style={{
-        display: show ? 'block' : 'none',
+        display: show ? "block" : "none",
       }}
     >
       <NotebookTopBar {...{ project }} />
-      <div className='p-4 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 min-h-[calc(100vh-180px)]'>
+      <div className="p-4 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 min-h-[calc(100vh-180px)]">
         {isLoading && <div>Loading...</div>}
-        {project.topics.map(note => (
+        {project.topics.map((note) => (
           <Note
             key={note.id}
             note={note}
