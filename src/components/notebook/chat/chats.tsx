@@ -47,13 +47,13 @@ const Chats = ({ data = [] }: { data: ChatMessageType[] }) => {
       })}
 
       {/* Generating response... */}
-      {/* <div className="w-full pl-12">
-            <div className="loading text-slate-500 dark:text-slate-400">
-              <span className="text-title">&#8226;</span>
-              <span className="text-title">&#8226;</span>
-              <span className="text-title">&#8226;</span>
-            </div>
-          </div> */}
+      <div className="w-full pl-12">
+        <div className="loading text-slate-500 dark:text-slate-400">
+          <span className="text-title">&#8226;</span>
+          <span className="text-title">&#8226;</span>
+          <span className="text-title">&#8226;</span>
+        </div>
+      </div>
     </div>
   );
 };
