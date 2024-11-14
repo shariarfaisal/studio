@@ -1,7 +1,7 @@
 "use client";
 import { FileText } from "lucide-react";
 
-import { useNotebook } from "../Provider";
+import { useNotebook } from "../provider";
 import { useEffect, useState } from "react";
 import ContentLoader from "react-content-loader";
 import ChatHistory from "./ChatHistory";
@@ -49,18 +49,16 @@ export const NotebookSidebar = () => {
     setSources,
     openSourceDetails,
   } = useNotebook();
-  const {id}=useParams()
+  const { id } = useParams();
   // const { data, isLoading } = useQuery({
   //   queryKey: ["sources"],
   //   queryFn: notebookService.getSources,
   // });
-    
+
   const [isLoading, setIsLoading] = useState(true);
 
-  
-
-  const {getProjectById}=useProjectStore()
-  const project=getProjectById(id as string)
+  const { getProjectById } = useProjectStore();
+  const project = getProjectById(id as string);
 
   useEffect(() => {
     if (project) {
@@ -123,5 +121,3 @@ export const NotebookSidebar = () => {
     </div>
   );
 };
-
-

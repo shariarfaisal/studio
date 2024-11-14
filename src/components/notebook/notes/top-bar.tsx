@@ -1,7 +1,7 @@
 "use client";
 
 import { Check, LoaderIcon, Plus, Trash2, X } from "lucide-react";
-import { useNotebook } from "../Provider";
+import { useNotebook } from "../provider";
 import { useMutation } from "@tanstack/react-query";
 import { notebookService } from "@/services/notebook";
 import { Button, Popconfirm } from "@/components/ui";
@@ -10,10 +10,10 @@ import { useState } from "react";
 import { Project, Status, Topic } from "@/types";
 import { nanoid } from "nanoid";
 
- type NotebookTopBarProps = {
+type NotebookTopBarProps = {
   project: Project;
- }
-const NotebookTopBar = ({project}:NotebookTopBarProps) => {
+};
+const NotebookTopBar = ({ project }: NotebookTopBarProps) => {
   const {
     selectAllNote,
     deselectAllNote,
@@ -23,7 +23,7 @@ const NotebookTopBar = ({project}:NotebookTopBarProps) => {
     deleteNotes,
   } = useNotebook();
   const [isPending, setIsLoading] = useState(false);
-  const {setProjectStore}=useProjectStore()
+  const { setProjectStore } = useProjectStore();
   // const { mutate, isPending } = useMutation({
   //   mutationKey: ["addNote"],
   //   mutationFn: notebookService.addNote,
@@ -53,7 +53,7 @@ const NotebookTopBar = ({project}:NotebookTopBarProps) => {
       name: "Untitled",
       updated_at: new Date(),
       status: Status.CURRENT, // or any appropriate status value
-    }
+    };
     setProjectStore((prev) => {
       const updatedProjects = prev.projects.map((proj) => {
         if (proj.id === project.id) {
@@ -64,13 +64,13 @@ const NotebookTopBar = ({project}:NotebookTopBarProps) => {
         }
         return proj;
       });
-  
+
       return {
         ...prev,
         projects: updatedProjects,
       };
     });
-  
+
     setIsLoading(false);
   };
 
