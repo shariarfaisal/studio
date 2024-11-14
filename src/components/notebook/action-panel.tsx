@@ -17,8 +17,8 @@ import { WORKFLOWS } from "@/configs";
 import { useWorkflow } from "@/hooks";
 import { useChatStore } from "@/store";
 import { SESSION_ASSETS } from "@/types";
-import { set, uniqBy } from "lodash";
-import { LLM_THINKING_MODE } from "@/helpers";
+import { uniqBy } from "lodash";
+import { LLM_PROCESSING_MODE } from "@/helpers";
 
 export const ActionPanel = () => {
   const [message, setMessage] = useState("");
@@ -44,7 +44,7 @@ export const ActionPanel = () => {
 
       setMessage("");
 
-      setChatStore({ typingResponse: "## " + LLM_THINKING_MODE });
+      setChatStore({ typingResponse: `**${LLM_PROCESSING_MODE}**` });
       triggerListener({
         session_id: id as string,
         onTypingResponse: (message) => {
