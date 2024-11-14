@@ -27,6 +27,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cookies-next": "^4.3.0",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.454.0",
     "nanoid": "^5.0.8",
     "next": "15.0.3",
@@ -44,6 +45,7 @@
     "zustand": "^5.0.1"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.13",
     "@types/node": "^20",
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
