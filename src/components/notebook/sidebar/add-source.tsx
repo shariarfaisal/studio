@@ -7,7 +7,7 @@ import { DialogTitle, DialogTrigger } from "@radix-ui/react-dialog";
 import { ArrowLeft, PlusSquare, UploadIcon } from "lucide-react";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { useNotebook } from "../provider";
+import { useNotebook } from "../NotebookProvider";
 import { Input } from "@/components/ui/input";
 import { useParams } from "next/navigation";
 import { useProjectStore } from "@/store";

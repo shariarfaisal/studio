@@ -3,7 +3,7 @@ import { FileText } from "lucide-react";
 import { SidebarMenu, SidebarMenuItem } from "../../ui/sidebar";
 import { useQuery } from "@tanstack/react-query";
 import { notebookService } from "@/services/notebook";
-import { useNotebook } from "../provider";
+import { useNotebook } from "../NotebookProvider";
 import { useEffect } from "react";
 import ContentLoader from "react-content-loader";
 import ChatHistory from "./chat-history";

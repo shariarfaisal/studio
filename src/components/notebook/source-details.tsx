@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "../ui";
-import { useNotebook } from "./provider";
+import { useNotebook } from "./NotebookProvider";
 import { FileText, WandSparkles, X } from "lucide-react";
 
 const SourceDetails = () => {

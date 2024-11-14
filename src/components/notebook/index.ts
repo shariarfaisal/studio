@@ -6,6 +6,6 @@ export * from "./notes";
 export * from "./sidebar";
 export * from "./sidebar/chat-history";
 export * from "./sidebar";
-export * from "./provider";
-export * from "./notebook";
+export * from "./NotebookProvider";
+export * from "./NotebookDetails";
 export * from "./action-panel";

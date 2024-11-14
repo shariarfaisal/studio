@@ -1,7 +1,7 @@
 "use client";
 import { FileText } from "lucide-react";
 
-import { useNotebook } from "../provider";
+import { useNotebook } from "../NotebookProvider";
 import { useEffect, useState } from "react";
 import ContentLoader from "react-content-loader";
 import { Button, SidebarMenu, SidebarMenuItem } from "@/components/ui";

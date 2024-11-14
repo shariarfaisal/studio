@@ -2,7 +2,7 @@
 
 import Notes from "./notes";
 import NotebookChat from "./chat";
-import { useNotebook } from "./provider";
+import { useNotebook } from "./NotebookProvider";
 import SourceDetails from "./source-details";
 import { useParams } from "next/navigation";
 import { useProjectStore } from "@/store";

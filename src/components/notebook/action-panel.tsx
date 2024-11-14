@@ -2,7 +2,7 @@
 
 import { SendHorizonal } from "lucide-react";
 import { Button } from "../ui/button";
-import { useNotebook } from "./provider";
+import { useNotebook } from "./NotebookProvider";
 import {
   Select,
   SelectContent,

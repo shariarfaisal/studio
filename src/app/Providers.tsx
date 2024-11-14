@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import NotebookProvider from '@/components/notebook/provider';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import NotebookProvider from "@/components/notebook/NotebookProvider";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 

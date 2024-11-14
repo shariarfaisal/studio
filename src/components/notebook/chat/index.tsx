@@ -5,7 +5,7 @@ import { notebookService } from "@/services/notebook";
 import { useQuery } from "@tanstack/react-query";
 import { Edit, X } from "lucide-react";
 import Chats from "./chats";
-import { useNotebook } from "../provider";
+import { useNotebook } from "../NotebookProvider";
 
 const NotebookChat = ({ show }: { show: boolean }) => {
   const { toggleChats } = useNotebook();
