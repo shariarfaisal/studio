@@ -1,6 +1,7 @@
 import { IFile } from "@/types";
 
-export const extractJson = (content: string): object => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const extractJson = (content: string): any => {
   try {
     /** Extracts valid JSON strings delimited by 'json' and '```' from raw text.
      *
