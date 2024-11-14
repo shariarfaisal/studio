@@ -1,4 +1,4 @@
-export * from './chat/chats';
+export * from './temp/chats';
 export * from './chat';
 export * from './notes/note';
 export * from './notes/top-bar';
